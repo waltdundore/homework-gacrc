@@ -1,0 +1,20 @@
+ #Prerequisites installation
+  
+  - name: SELinux
+    ansible.posix.selinux:
+     policy: targeted
+     state: permissive
+
+
+  - name: Upgrade all packages
+    ansible.builtin.dnf:
+      name: "*"
+      state: latest
+
+
+
+  - name: Copy a new sudoers file into place, after passing validation with visudo
+    ansible.builtin.template:
+      src: 10_wdundore.j2
+      dest: /etc/sudoers.d/10_wdundore
+      validate: /usr/sbin/visudo -cf %s

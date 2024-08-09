@@ -1,0 +1,5 @@
+- name: Install chrony
+  ansible.builtin.import_tasks: chrony.yml
+
+- name: Install prerequisites
+  ansible.builtin.import_tasks: prerequisites.yml
