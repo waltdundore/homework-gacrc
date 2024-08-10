@@ -6,10 +6,10 @@
      state: permissive
 
 
-  - name: Upgrade all packages
-    ansible.builtin.dnf:
-      name: "*"
-      state: latest
+  #- name: Upgrade all packages
+  #  ansible.builtin.dnf:
+  #    name: "*"
+  #    state: latest
 
 
 

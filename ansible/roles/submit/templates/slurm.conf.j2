@@ -1,0 +1,14 @@
+# Example slurm.conf configuration
+ClusterName=mycluster
+ControlMachine={{ groups['slurm_controller'][0] }}
+SlurmdPort=7003
+SlurmctldPort=7003
+AuthType=auth/munge
+StateSaveLocation=/var/spool/slurmctld
+SlurmdSpoolDir=/var/spool/slurmd
+SlurmdPort=7003
+
+NodeName=compute1 NodeAddr=compute1.dundore.net State=UNKNOWN
+NodeName=compute2 NodeAddr=compute2.dundore.net State=UNKNOWN
+
+PartitionName=debug Nodes=compute1,compute2 Default=YES MaxTime=INFINITE State=UP
