@@ -1,2 +1,2 @@
-#- name: Import vagrant install
-#  ansible.builtin.import_tasks: vagrant.yml
+- name: Install slurm compute packages
+  ansible.builtin.import_tasks: compute_packages.yml

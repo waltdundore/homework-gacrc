@@ -1,18 +1,32 @@
----
-#Prerequisites installation
+ #Prerequisites installation
+  
+  - name: SELinux
+    ansible.posix.selinux:
+     policy: targeted
+     state: permissive
 
-- name: SELinux
-  ansible.posix.selinux:
-    policy: targeted
-    state: permissive
+  - name: Enable the CodeReady Linux Builder repository
+    become: true
+    ansible.builtin.command: dnf config-manager --enable crb
+    args:
+      creates: /etc/yum.repos.d/rocky-crb.repo
 
-#- name: Upgrade all packages
-#  ansible.builtin.dnf:
-#    name: "*"
-#    state: latest
+  - name: add epel
+    ansible.builtin.dnf:
+      name: epel-release
+      state: present
 
-- name: Copy a new sudoers file into place, after passing validation with visudo
-  ansible.builtin.template:
-    src: 10_wdundore.j2
-    dest: /etc/sudoers.d/10_wdundore
-    validate: /usr/sbin/visudo -cf %s
+ 
+
+  #- name: Upgrade all packages
+  #  ansible.builtin.dnf:
+  #    name: "*"
+  #    state: latest
+
+
+
+  - name: Copy a new sudoers file into place, after passing validation with visudo
+    ansible.builtin.template:
+      src: 10_wdundore.j2
+      dest: /etc/sudoers.d/10_wdundore
+      validate: /usr/sbin/visudo -cf %s

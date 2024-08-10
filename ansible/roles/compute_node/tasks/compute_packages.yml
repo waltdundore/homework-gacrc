@@ -1,0 +1,10 @@
+- name: Install Slurm compute node packages
+     dnf:
+       name:
+         - slurm
+         - slurm-slurmd
+         - slurm-doc
+       state: present
+
+- name: Configure Slurm to point to the controller
+      # Configuration details for the compute nodes to point to the controller should go here
