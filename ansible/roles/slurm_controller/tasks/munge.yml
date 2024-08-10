@@ -1,0 +1,37 @@
+---
+  - name: Start Munge service
+    service: name=munge state=started
+    register: munge_installed
+    ignore_errors: yes
+
+  - name: Include "{{ansible_os_family}}" munge recipe if package is not present
+    include_tasks: "{{ansible_os_family}}.yaml"
+    when: munge_installed is failed
+
+  - name: set munge log directory access rights
+    file: path=/var/log/munge state=directory mode=0700
+
+  - name: set log directory access rights
+    file: path=/var/log state=directory mode=0755
+
+  - name: Generate munge key password
+    set_fact:
+      munge_key_password: "{{ lookup('password', '/var/tmp/munge_pass') }}"
+    when: munge_key_password == ''
+    delegate_to: localhost
+
+  - name: Generate munge key with password
+    shell: echo -n "{{ munge_key_password }}" | sha512sum | cut -d' ' -f1 
+    register: key_content
+    changed_when: false
+
+  - name: Create munge.key file with password
+    copy: content="{{ key_content.stdout }}" dest=/etc/munge/munge.key mode=0400 owner=munge
+    register: munge_key_create
+
+  - name: Restart Munge service
+    service: name=munge state=restarted
+    when: munge_key_create is changed
+
+  - name: Make sure the munge service is started
+    service: name=munge state=started enabled=yes

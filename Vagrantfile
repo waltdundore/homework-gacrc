@@ -30,21 +30,19 @@ Vagrant.configure(2) do |config|
   config.vm.define "submit" do |submit|
     submit.vm.box = VAGRANT_BOX
     submit.vm.hostname = "submit.dundore.net"
-    #submit.vm.provision "shell", path: "./scratch/addswap.sh"
+    submit.vm.provision "shell", path: "./scratch/addswap.sh"
   end
 
   config.vm.define "compute1" do |compute1|
     compute1.vm.box = VAGRANT_BOX
     compute1.vm.hostname = "compute1.dundore.net"
-  
-    #compute1.vm.provision "shell", path: "./scratch/addswap.sh"
+    compute1.vm.provision "shell", path: "./scratch/addswap.sh"
   end
 
   config.vm.define "compute2" do |compute2|
     compute2.vm.box = VAGRANT_BOX
     compute2.vm.hostname = "compute2.dundore.net"
-
-    #compute2.vm.provision "shell", path: "./scratch/addswap.sh"
+    compute2.vm.provision "shell", path: "./scratch/addswap.sh"
   end
 
 
