@@ -1,0 +1,39 @@
+- name: Install Slurm controller and necessary packages
+  dnf:
+    name:
+      - slurm-wlm
+      - slurm-wlm-basic-plugins
+      - slurm-wlm-doc
+    state: present
+
+- name: Configure Slurm
+  template:
+    src: slurm.conf.j2
+    dest: /etc/slurm-llnl/slurm.conf
+  notify: restart slurm
+
+- name: Start and enable Slurm services
+  systemd:
+    name: slurmctld
+    state: started
+    enabled: true
+
+  handlers:
+    - name: restart slurm
+      systemd:
+        name: slurmctld
+        state: restarted
+
+- name: Install and configure Slurm on compute nodes
+  hosts: compute_nodes
+  become: true
+  tasks:
+    - name: Install Slurm compute node packages
+      dnf:
+        name:
+          - slurm-wlm
+          - slurm-wlm-basic-plugins
+        state: present
+
+    - name: Configure Slurm to point to the controller
+      # Configuration details for the compute nodes to point to the controller should go here

@@ -1,3 +1,4 @@
+---
 - name: Install chrony
   ansible.builtin.import_tasks: chrony.yml
 
