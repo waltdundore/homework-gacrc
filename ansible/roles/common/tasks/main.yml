@@ -2,5 +2,8 @@
 - name: Install chrony
   ansible.builtin.import_tasks: chrony.yml
 
+- name: Update /etc/hosts file
+  ansible.builtin.import_tasks: hosts.yml
+
 - name: Install prerequisites
   ansible.builtin.import_tasks: prerequisites.yml
