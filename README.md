@@ -55,6 +55,7 @@ slurmdb.dundore.net 192.168.201.99 #slurmdb_host
 - slurm_controller
  - Install munge packages, apply permissions and start munge
  - verify munge key
+   -Security note: change the munge key
 - compute_node
  - Install munge packages, apply permissions and start munge
  - copy and verify munge key
