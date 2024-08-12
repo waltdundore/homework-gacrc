@@ -1,0 +1,13 @@
+---
+- name: Make sure openssh is installed
+  ansible.builtin.apt:
+    name: 
+      - openssh-server
+      - openssh-client
+    state: latest
+    update_cache: true
+
+- name: Restart openssh
+  ansible.builtin.service:
+    name: openssh-server
+    state: restarted

@@ -1,6 +1,6 @@
 ---
 - name: Make sure chronyd is installed
-  ansible.builtin.yum:
+  ansible.builtin.apt:
     name: chrony
     state: latest
     update_cache: true

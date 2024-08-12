@@ -6,6 +6,14 @@
       - munge
       - munge-libs
     state: present
+
+- name: Create a new regular user with sudo privileges
+      user:
+        name: "munge"
+        state: present
+        groups: wheel
+        append: true
+        create_home: true
  
 - name: Start Munge service
   service: name=munge state=started

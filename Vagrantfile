@@ -13,7 +13,7 @@ end
 # Overrides and defaults
 VAGRANT_CPUS       = settings['VAGRANT_CPUS']       || 4
 VAGRANT_MEMORY     = settings['VAGRANT_MEMORY']     || 4092
-VAGRANT_BOX        = settings['VAGRANT_BOX']        || 'rockylinux/9'
+VAGRANT_BOX        = settings['VAGRANT_BOX']        || 'ubuntu/jammy64'
 VAGRANT_SSHFORWARD = settings['VAGRANT_SSHFORWARD'] || false
 VAGRANT_RUN_CUSTOM = settings['VAGRANT_RUN_CUSTOM'] || 'never'
 
