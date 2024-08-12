@@ -13,30 +13,29 @@
     state: restarted
 
 #Ensure hosts are in in the known_hosts file
-- name: Ensure submit is present in known_hosts file
-  known_hosts:
-    name: "submit.dundore.net"
-    state: present
-    key: "{{ lookup('pipe', 'ssh-keyscan submit.dundore.net') }}"
-    hash_host: true
+- name: Fetch SSH keys from hosts
+  command: ssh-keyscan -H {{ item }} 2>/dev/null
+  register: ssh_keys
+  loop:
+    - submit.dundore.net
+    - compute1.dundore.net
+    - compute2.dundore.net
+    - slurmdb.dundore.net
 
-- name: Ensure compute1 is present in known_hosts file
-  known_hosts:
-    name: "compute1.dundore.net"
-    state: present
-    key: "{{ lookup('pipe', 'ssh-keyscan compute1.dundore.net') }}"
-    hash_host: true
+- name: Create temporary file with new keys
+  copy:
+    content: "{{ ssh_keys.results | map(attribute='stdout_lines') | sum(start=[]) | join('\n') }}"
+    dest: /tmp/new_keys
+    mode: '0644'
 
-- name: Ensure compute2 is present in known_hosts file
-  known_hosts:
-    name: "compute2.dundore.net"
-    state: present
-    key: "{{ lookup('pipe', 'ssh-keyscan compute2.dundore.net') }}"
-    hash_host: true
+- name: Ensure known_hosts does not have duplicates
+  ansible.builtin.shell: |
+    sort -u /tmp/new_keys /etc/ssh/known_hosts | uniq > /tmp/known_hosts_temp
+    mv /tmp/known_hosts_temp /etc/ssh/known_hosts
+  args:
+    executable: /bin/bash
 
-- name: Ensure slurmdb is present in known_hosts file
-  known_hosts:
-    name: "slurmdb.dundore.net"
-    state: present
-    key: "{{ lookup('pipe', 'ssh-keyscan slurmdb.dundore.net') }}"
-    hash_host: true
+- name: Clean up temporary file
+  file:
+    path: /tmp/new_keys
+    state: absent

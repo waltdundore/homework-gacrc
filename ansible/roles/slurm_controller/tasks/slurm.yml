@@ -5,7 +5,7 @@
     mode: '0755'
 
 - name: Install Slurm controller and necessary packages
-  dnf:
+  apt:
     name:
       - slurm
       - slurm-slurmctld
