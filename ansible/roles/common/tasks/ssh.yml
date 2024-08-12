@@ -11,3 +11,32 @@
   ansible.builtin.service:
     name: sshd
     state: restarted
+
+#Ensure hosts are in in the known_hosts file
+- name: Ensure submit is present in known_hosts file
+  known_hosts:
+    name: "submit.dundore.net"
+    state: present
+    key: "{{ lookup('pipe', 'ssh-keyscan submit.dundore.net') }}"
+    hash_host: true
+
+- name: Ensure compute1 is present in known_hosts file
+  known_hosts:
+    name: "compute1.dundore.net"
+    state: present
+    key: "{{ lookup('pipe', 'ssh-keyscan compute1.dundore.net') }}"
+    hash_host: true
+
+- name: Ensure compute2 is present in known_hosts file
+  known_hosts:
+    name: "compute2.dundore.net"
+    state: present
+    key: "{{ lookup('pipe', 'ssh-keyscan compute2.dundore.net') }}"
+    hash_host: true
+
+- name: Ensure slurmdb is present in known_hosts file
+  known_hosts:
+    name: "slurmdb.dundore.net"
+    state: present
+    key: "{{ lookup('pipe', 'ssh-keyscan slurmdb.dundore.net') }}"
+    hash_host: true

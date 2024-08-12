@@ -51,7 +51,6 @@ Vagrant.configure(2) do |config|
  config.ssh.forward_agent = VAGRANT_SSHFORWARD
  config.vm.synced_folder '.', '/vagrant', disabled: true
  config.vm.synced_folder ".", "/vagrant",type: "nfs",nfs_version: 4,nfs_udp: false
- config.vm.provision "shell", path: "ssh-keyscan.sh"
  
   # Provision with Ansible
   config.vm.provision "ansible" do |ansible|

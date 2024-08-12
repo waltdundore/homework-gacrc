@@ -1,10 +1,9 @@
 - name: Install Slurm compute node packages
-     dnf:
+     apt:
        name:
          - munge
-         - slurm
-         - slurm-slurmd
-         - slurm-doc
+         - libmunge2
+         - libmunge-dev
        state: present
 
 - name: Configure Slurm to point to the controller

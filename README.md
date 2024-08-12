@@ -47,8 +47,14 @@ slurmdb.dundore.net 192.168.201.99 #slurmdb_host
 
 ##### Roles
 - common
-- compute_node
+  - Install and configure chrony
+  - Update the /etc/hosts file
+  - copy sudoers file into /etc/sudoers.d/10_vagrant and validate for vagrant user
+  - install and enable sshd
 - slurm_controller
+ - Install and start munge
+ - verify munge key
+- compute_node
 - slurmdb
 
 name hosts and add entries to hosts file
