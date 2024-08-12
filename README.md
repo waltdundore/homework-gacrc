@@ -52,10 +52,11 @@ slurmdb.dundore.net 192.168.201.99 #slurmdb_host
   - copy sudoers file into /etc/sudoers.d/10_vagrant and validate for vagrant user
   - install and enable sshd
   - ssh-keyscan to known_hosts
+  - I recommend generating a new ssh key and save the public and private key in the secure/.ssh directory. They are linked to insecure_key and insecure_key.pub "ssh-keygen -b 4096"
 - slurm_controller
  - Install munge packages, apply permissions and start munge
  - verify munge key
-   -Security note: change the munge key
+   -Security note: change the munge key - put your key in the secure/munge directory and name it munge.key.j2. 
 - compute_node
  - Install munge packages, apply permissions and start munge
  - copy and verify munge key

@@ -12,6 +12,22 @@
     name: sshd
     state: restarted
 
+- name: Creates directory
+  ansible.builtin.file:
+    path: /root/.ssh
+    state: directory
+    owner: root
+    group: root
+    mode: 0700
+
+- name: Creates directory
+  ansible.builtin.file:
+    path: /home/vagrant/.ssh
+    state: directory
+    owner: vagrant
+    group: vagrant
+    mode: 0700
+
 #Ensure hosts are in in the known_hosts file
 - name: Fetch SSH keys from hosts
   command: ssh-keyscan -H {{ item }} 2>/dev/null
@@ -31,11 +47,39 @@
 - name: Ensure known_hosts does not have duplicates
   ansible.builtin.shell: |
     sort -u /tmp/new_keys /etc/ssh/known_hosts | uniq > /tmp/known_hosts_temp
-    mv /tmp/known_hosts_temp /etc/ssh/known_hosts
+    cp /tmp/known_hosts_temp /root/.ssh/known_hosts
+    mv /tmp/known_hosts_temp /home/vagrant/.ssh/known_hosts
   args:
     executable: /bin/bash
+
+- name: Deploy pvt key for vagrant
+  ansible.builtin.template:
+    src: insecure_key.j2
+    dest: /etc/chrony.conf
+    owner: vagrant
+    group: vagrant
+    mode: "0600"
+    backup: true
+
+- name: Deploy pub key for vagrant
+  ansible.builtin.template:
+    src: insecure_key.pub.j2
+    dest: /etc/chrony.conf
+    owner: vagrant
+    group: vagrant
+    mode: "0600"
+    backup: true
+
+- name: Change permissions to 0600 root
+  ansible.builtin.file:
+    path: 
+      - /root/.ssh/known_hosts
+    owner: root
+    group: root
+    mode: '0600'
 
 - name: Clean up temporary file
   file:
     path: /tmp/new_keys
     state: absent
+
