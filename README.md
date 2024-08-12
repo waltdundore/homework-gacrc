@@ -12,6 +12,21 @@ This was tested on Fedora 40 as a host using the following:
 
 ### Stage 1: Vagrant server creation using libvirt
 
+#### Makefile
+The following options are handled by the Makefile:
+```
+install:
+	vagrant up --no-destroy-on-error
+
+debug:
+	vagrant up --debug --no-destroy-on-error
+
+clean:
+	vagrant destroy -f && rm -rf .vagrant
+    
+```
+
+
 To start the build process, navigate to the root directory and execute:
 ```
 make install

@@ -1,5 +1,5 @@
 #!/bin/bash
-
+# To reduce the size of some images the swap partition is removed. This script adds a swap partition to the machine.
 SWAPFILE='/swap'
 SWAPSIZE_MB='1024'
 
