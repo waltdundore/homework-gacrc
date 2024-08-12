@@ -55,7 +55,7 @@
 - name: Deploy pvt key for vagrant
   ansible.builtin.template:
     src: insecure_key.j2
-    dest: /etc/chrony.conf
+    dest: /vagrant/secure/.ssh/insecure_key
     owner: vagrant
     group: vagrant
     mode: "0600"
@@ -64,7 +64,7 @@
 - name: Deploy pub key for vagrant
   ansible.builtin.template:
     src: insecure_key.pub.j2
-    dest: /etc/chrony.conf
+    dest: /vagrant/secure/.ssh/insecure_key.pub
     owner: vagrant
     group: vagrant
     mode: "0600"
