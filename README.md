@@ -1,7 +1,5 @@
 # homework-gacrc
 
-
-
 # Documentation
 ## Prerequisites:
 This was tested on Fedora 40 as a host using the following:
@@ -46,6 +44,13 @@ slurmdb.dundore.net 192.168.201.99 #slurmdb_host
 
 ### Stage 2:
 #### Ansible Playbook provisioning
+
+##### Roles
+- common
+- compute_node
+- slurm_controller
+- slurmdb
+
 name hosts and add entries to hosts file
 
 
