@@ -52,31 +52,13 @@
   args:
     executable: /bin/bash
 
-- name: Deploy pvt key for vagrant
-  ansible.builtin.template:
-    src: insecure_key.j2
-    dest: /vagrant/secure/.ssh/insecure_key
-    owner: vagrant
-    group: vagrant
-    mode: "0600"
-    backup: true
-
-- name: Deploy pub key for vagrant
-  ansible.builtin.template:
-    src: insecure_key.pub.j2
-    dest: /vagrant/secure/.ssh/insecure_key.pub
-    owner: vagrant
-    group: vagrant
-    mode: "0600"
-    backup: true
-
-- name: Change permissions to 0600 root
+- name: Corrects permissions on the known_hosts file
   ansible.builtin.file:
-    path: 
-      - /root/.ssh/known_hosts
-    owner: root
-    group: root
-    mode: '0600'
+    path: /home/vagrant/.ssh/known_hosts
+    owner: vagrant
+    group: vagrant
+    mode: 0600
+
 
 - name: Clean up temporary file
   file:

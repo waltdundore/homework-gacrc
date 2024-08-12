@@ -1,0 +1,11 @@
+---
+- name: Deploy private key for vagrant
+  ansible.builtin.template:
+    src: id_rsa.j2
+    dest: /home/vagrant/.ssh/id_rsa
+    owner: vagrant
+    group: vagrant
+    mode: "0600"
+    backup: true
+
+

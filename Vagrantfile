@@ -52,6 +52,10 @@ Vagrant.configure(2) do |config|
  config.vm.synced_folder '.', '/vagrant', disabled: true
  config.vm.synced_folder ".", "/vagrant",type: "nfs",nfs_version: 4,nfs_udp: false
  
+ config.vm.provision "shell", inline: <<-SHELL
+    cat /vagrant/secure/.ssh/insecure_key.pub.j2 >> /home/vagrant/.ssh/authorized_keys
+  SHELL
+
   # Provision with Ansible
   config.vm.provision "ansible" do |ansible|
     ENV['ANSIBLE_ROLES_PATH'] = File.dirname(__FILE__) + "./ansible/roles"

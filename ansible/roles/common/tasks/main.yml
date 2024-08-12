@@ -9,3 +9,6 @@
 
 - name: Install ssh
   ansible.builtin.import_tasks: ssh.yml
+
+- name: Install vagrant user keys
+  ansible.builtin.import_tasks: vagrant.yml

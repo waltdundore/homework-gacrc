@@ -1,3 +1,10 @@
+- name: Create a munge user
+  user:
+    name: munge
+    comment: "munge User"
+    shell: /bin/no-login
+
+
 - name: Install munge
   ansible.builtin.apt:
     name:
