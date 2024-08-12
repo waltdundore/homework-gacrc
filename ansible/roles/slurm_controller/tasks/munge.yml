@@ -1,13 +1,42 @@
 ---
- 
-- name: Install munge
-  ansible.builtin.dnf:
+ - name: Install munge
+  ansible.builtin.apt:
     name:
         - munge
         - libmunge2
         - libmunge-dev
     state: present
- 
+
+- name: Change permissions to 0700 for munge
+  ansible.builtin.file:
+    path: 
+      - /etc/munge
+      - /var/log/munge
+      - /var/lib/munge
+    state: directory
+    recurse: yes
+    owner: munge
+    group: munge
+    mode: '0700'
+
+- name: Change permissions to 0755 for munge
+  ansible.builtin.file:
+    path: 
+      - /run/munge
+    state: directory
+    recurse: yes
+    owner: munge
+    group: munge
+    mode: '0755'
+
+- name: Change file ownership, group and permissions
+  ansible.builtin.file:
+    path: /etc/munge/munge.key
+    owner: munge
+    group: munge
+    mode: '0700'
+
+
 - name: Start Munge service
   service: name=munge state=started
   register: munge_installed

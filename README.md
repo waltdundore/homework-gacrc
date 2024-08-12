@@ -51,10 +51,14 @@ slurmdb.dundore.net 192.168.201.99 #slurmdb_host
   - Update the /etc/hosts file
   - copy sudoers file into /etc/sudoers.d/10_vagrant and validate for vagrant user
   - install and enable sshd
+  - ssh-keyscan to known_hosts
 - slurm_controller
- - Install and start munge
+ - Install munge packages, apply permissions and start munge
  - verify munge key
 - compute_node
+ - Install munge packages, apply permissions and start munge
+ - copy and verify munge key
+
 - slurmdb
 
 name hosts and add entries to hosts file
