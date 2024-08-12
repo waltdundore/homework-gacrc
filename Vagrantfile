@@ -49,9 +49,9 @@ Vagrant.configure(2) do |config|
     compute2.vm.network "private_network", ip: "192.168.201.102"
   end
 
-  config.vm.define "compute2" do |slurmdb|
+  config.vm.define "slurmdb" do |slurmdb|
     slurmdb.vm.box = VAGRANT_BOX
-    slurmdb.vm.hostname = "compute2.dundore.net"
+    slurmdb.vm.hostname = "slurmdb.dundore.net"
     slurmdb.vm.provision "shell", path: "./addswap.sh"
     slurmdb.vm.network "private_network", ip: "192.168.201.99"
   end
