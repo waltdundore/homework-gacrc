@@ -1,6 +1,7 @@
 - name: Install Slurm compute node packages
      dnf:
        name:
+         - munge
          - slurm
          - slurm-slurmd
          - slurm-doc

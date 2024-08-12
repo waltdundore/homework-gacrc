@@ -1,10 +1,17 @@
+- name: Ensure Slurm configuration directory exists
+  file:
+    path: /etc/slurm-llnl
+    state: directory
+    mode: '0755'
+
 - name: Install Slurm controller and necessary packages
   dnf:
     name:
       - slurm
       - slurm-slurmctld
       - slurm-doc
-      - slurm-slurmd 
+      - slurm-slurmd
+      - munge
     state: present
 
 - name: Configure Slurm
@@ -18,3 +25,5 @@
     name: slurmctld
     state: started
     enabled: true
+
+

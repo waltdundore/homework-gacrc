@@ -1,4 +1,7 @@
 ---
+- name: Install Munge
+  ansible.builtin.import_tasks: munge.yml
+
 - name: Install Slurm
   ansible.builtin.import_tasks: slurm.yml
 

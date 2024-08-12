@@ -1,2 +1,5 @@
 - name: Install slurm compute packages
   ansible.builtin.import_tasks: compute_packages.yml
+
+  - name: Install munge
+  ansible.builtin.import_tasks: munge.yml
