@@ -53,7 +53,7 @@ Vagrant.configure(2) do |config|
  config.vm.synced_folder ".", "/vagrant",type: "nfs",nfs_version: 4,nfs_udp: false
  
  config.vm.provision "shell", inline: <<-SHELL
-    cat /vagrant/secure/.ssh/insecure_key.pub.j2 >> /home/vagrant/.ssh/authorized_keys
+    cat /vagrant/secure/.ssh/id_rsa.pub.j2 >> /home/vagrant/.ssh/authorized_keys
   SHELL
 
   # Provision with Ansible
