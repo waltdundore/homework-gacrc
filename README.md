@@ -1,13 +1,21 @@
 # homework-gacrc
-homework-gacrc
+
+
 
 # Documentation
 ## Prerequisites:
+This was tested on Fedora 40 as a host using the following:
 - Vagrant with vagrant-libvirt plugin
 - Libvirt
 - NFS4 server
+- make
 
 ### Stage 1: Vagrant server creation using libvirt
+
+To start the build process, navigate to the root directory and execute:
+```
+make install
+```
 
 Virtual OS used - RockyLinux 9 (https://rockylinux.org/)
 Documentation available: https://docs.rockylinux.org/
