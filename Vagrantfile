@@ -13,16 +13,11 @@ end
 # Overrides and defaults
 VAGRANT_CPUS       = settings['VAGRANT_CPUS']       || 4
 VAGRANT_MEMORY     = settings['VAGRANT_MEMORY']     || 4092
-VAGRANT_BOX        = settings['VAGRANT_BOX']        || 'ubuntu/jammy64'
+VAGRANT_BOX        = settings['VAGRANT_BOX']        || 'debian/bullseye64'
 VAGRANT_SSHFORWARD = settings['VAGRANT_SSHFORWARD'] || false
 VAGRANT_RUN_CUSTOM = settings['VAGRANT_RUN_CUSTOM'] || 'never'
 
 Vagrant.configure(2) do |config|
-
-  config.vm.network :private_network, type: 'dhcp'
-  config.ssh.forward_agent = VAGRANT_SSHFORWARD
-  config.vm.synced_folder '.', '/vagrant', disabled: true
-  config.vm.synced_folder ".", "/vagrant",type: "nfs",nfs_version: 4,nfs_udp: false
 
  #Define differences between the nodes
  # NFS: Make sure to enable nfs and forct TCP and NFSv4 on the host and set sudo rules:
@@ -52,7 +47,12 @@ Vagrant.configure(2) do |config|
     slurmdb.vm.network "private_network", ip: "192.168.201.99"
   end
 
-
+ #config.vm.network :private_network, type: 'dhcp'
+ config.ssh.forward_agent = VAGRANT_SSHFORWARD
+ config.vm.synced_folder '.', '/vagrant', disabled: true
+ config.vm.synced_folder ".", "/vagrant",type: "nfs",nfs_version: 4,nfs_udp: false
+ config.vm.provision "shell", path: "ssh-keyscan.sh"
+ 
   # Provision with Ansible
   config.vm.provision "ansible" do |ansible|
     ENV['ANSIBLE_ROLES_PATH'] = File.dirname(__FILE__) + "./ansible/roles"

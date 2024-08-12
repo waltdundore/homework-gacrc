@@ -32,8 +32,7 @@ To start the build process, navigate to the root directory and execute:
 make install
 ```
 
-Virtual OS used - RockyLinux 9 (https://rockylinux.org/)
-Documentation available: https://docs.rockylinux.org/
+Virtual OS used - Ubuntu 22.04
 
 
 #### create 4 servers with a private network
