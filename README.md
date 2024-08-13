@@ -1,7 +1,12 @@
 # homework-gacrc
 
 # Documentation
+
+### Security note: There are a a few concessions made in this repo because it is a demo. Do not do the following in any production environment:
+- /secure directory exposed - this has the vault password file exposed in plain text in the file .vault_password.txt
+
 ## Prerequisites:
+
 This was tested on Fedora 40 as a host using the following:
 - Vagrant with vagrant-libvirt plugin
 - Libvirt

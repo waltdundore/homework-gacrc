@@ -5,3 +5,4 @@ development: false
 homedir: /home/{{ item.name }}
 slurm_controller:
   hostname: "submit.dundore.net"
+ANSIBLE_VAULT_PASSWORD_FILE=/vagrant/secure/.vault_pass.txt
