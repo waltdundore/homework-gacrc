@@ -1,10 +1,17 @@
 ---
 # This playbook deploys the whole dev stack for a workstation .
-
-- name: Apply common configuration to all nodes
-  hosts: all
+- name: Apply slurm_controller configuration to slurm_controller nodes
+  hosts: slurm_controller
   become: true
 
   roles:
     - common
     - slurm_controller
+
+- name: Apply compute_node configuration to compute_node nodes
+  hosts: compute_node
+  become: true
+
+  roles:
+    - common
+    - compute_node

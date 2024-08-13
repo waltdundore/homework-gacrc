@@ -2,8 +2,11 @@
 
 # Documentation
 
-### Security note: There are a a few concessions made in this repo because it is a demo. Do not do the following in any production environment:
-- /secure directory exposed - this has the vault password file exposed in plain text in the file .vault_password.txt
+### Security note:
+- /secure directory - The munge key and private ssh key are encrypted using ansible vault. For this to work properly, there must be a file named '.vault_password.txt' containing the password to decrypt them using ansible vault.  For this demo the vault password is set to 
+```
+P@ssw0rd
+```
 
 ## Prerequisites:
 

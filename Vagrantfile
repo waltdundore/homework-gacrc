@@ -26,6 +26,7 @@ Vagrant.configure(2) do |config|
     submit.vm.box = VAGRANT_BOX
     submit.vm.hostname = "submit.dundore.net"
     submit.vm.network "private_network", ip: "192.168.201.100"
+    
 
   end
 
@@ -58,9 +59,11 @@ Vagrant.configure(2) do |config|
 
   # Provision with Ansible
   config.vm.provision "ansible" do |ansible|
+    ansible.vault_password_file = "./secure/.vault_pass.txt"
     ENV['ANSIBLE_ROLES_PATH'] = File.dirname(__FILE__) + "./ansible/roles"
     ansible.compatibility_mode = "2.0"
     ansible.playbook = "./ansible/main.yml"
+    ansible.inventory_path = "ansible/inventory.ini"
     ansible.raw_arguments = ["--diff"]
   end
 
