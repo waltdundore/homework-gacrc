@@ -25,7 +25,7 @@
 - name: Configure Slurm
   ansible.builtin.template:
     src: slurm.conf.j2
-    dest: /etc/slurm-llnl/slurm.conf
+    dest: /etc/slurm.conf
   notify: restart slurm
 
 - name: Start and enable Slurm services

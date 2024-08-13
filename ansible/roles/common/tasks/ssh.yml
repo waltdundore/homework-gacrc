@@ -47,8 +47,8 @@
 - name: Ensure known_hosts does not have duplicates
   ansible.builtin.shell: |
     sort -u /tmp/new_keys /etc/ssh/known_hosts | uniq > /tmp/known_hosts_temp
-    cp /tmp/known_hosts_temp /root/.ssh/known_hosts
-    mv /tmp/known_hosts_temp /home/vagrant/.ssh/known_hosts
+    cat /tmp/known_hosts_temp >> /root/.ssh/known_hosts
+    cat /tmp/known_hosts_temp >> /home/vagrant/.ssh/known_hosts
   args:
     executable: /bin/bash
 
