@@ -1,3 +1,4 @@
+---
 - name: Install Munge
   ansible.builtin.import_tasks: munge.yml
 

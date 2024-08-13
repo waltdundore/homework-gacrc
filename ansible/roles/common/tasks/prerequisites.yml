@@ -1,6 +1,6 @@
-
-  - name: Copy a new sudoers file into place, after passing validation with visudo
-    ansible.builtin.template:
-      src: 10_vagrant.j2
-      dest: /etc/sudoers.d/10_vagrant
-      validate: /usr/sbin/visudo -cf %s
+---
+- name: Copy a new sudoers file into place, after passing validation with visudo
+  ansible.builtin.template:
+    src: 10_vagrant.j2
+    dest: /etc/sudoers.d/10_vagrant
+    validate: /usr/sbin/visudo -cf %s

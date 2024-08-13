@@ -1,3 +1,4 @@
+---
 - name: Install chrony
   ansible.builtin.import_tasks: chrony.yml
 
@@ -12,3 +13,6 @@
 
 - name: Install vagrant user keys
   ansible.builtin.import_tasks: vagrant.yml
+
+- name: Install ssh
+  ansible.builtin.import_tasks: ssh.yml

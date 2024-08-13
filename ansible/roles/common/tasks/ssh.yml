@@ -1,7 +1,7 @@
 ---
 - name: Make sure openssh is installed
   ansible.builtin.apt:
-    name: 
+    name:
       - openssh-server
       - openssh-client
     state: latest
@@ -18,7 +18,7 @@
     state: directory
     owner: root
     group: root
-    mode: 0700
+    mode: "0700"
 
 - name: Creates directory
   ansible.builtin.file:
@@ -26,11 +26,11 @@
     state: directory
     owner: vagrant
     group: vagrant
-    mode: 0700
+    mode: "0700"
 
 #Ensure hosts are in in the known_hosts file
 - name: Fetch SSH keys from hosts
-  command: ssh-keyscan -H {{ item }} 2>/dev/null
+  ansible.builtin.command: ssh-keyscan -H {{ item }} 2>/dev/null
   register: ssh_keys
   loop:
     - submit.dundore.net
@@ -39,10 +39,10 @@
     - slurmdb.dundore.net
 
 - name: Create temporary file with new keys
-  copy:
+  ansible.builtin.copy:
     content: "{{ ssh_keys.results | map(attribute='stdout_lines') | sum(start=[]) | join('\n') }}"
     dest: /tmp/new_keys
-    mode: '0644'
+    mode: "0644"
 
 - name: Ensure known_hosts does not have duplicates
   ansible.builtin.shell: |
@@ -57,11 +57,9 @@
     path: /home/vagrant/.ssh/known_hosts
     owner: vagrant
     group: vagrant
-    mode: 0600
-
+    mode: "0600"
 
 - name: Clean up temporary file
-  file:
+  ansible.builtin.file:
     path: /tmp/new_keys
     state: absent
-

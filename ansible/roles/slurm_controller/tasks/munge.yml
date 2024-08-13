@@ -1,9 +1,9 @@
+---
 - name: Create a munge user
-  user:
+  ansible.builtin.user:
     name: munge
-    comment: "munge User"
+    comment: munge User
     shell: /bin/no-login
-
 
 - name: Install munge
   ansible.builtin.apt:
@@ -15,7 +15,7 @@
 
 - name: Change permissions to 0700 for munge
   ansible.builtin.file:
-    path: 
+    path:
       - /etc/munge
       - /var/log/munge
       - /var/lib/munge
@@ -23,29 +23,30 @@
     recurse: true
     owner: munge
     group: munge
-    mode: '0700'
+    mode: "0700"
 
 - name: Change permissions to 0755 for munge
   ansible.builtin.file:
-    path: 
+    path:
       - /run/munge
     state: directory
-    recurse: yes
+    recurse: true
     owner: munge
     group: munge
-    mode: '0755'
+    mode: "0755"
 
-- name: Deploy munge.key
+- name: Deploy munge key
   ansible.builtin.template:
     src: munge.key.j2
-    dest: /etc/chrony.conf
+    dest: /etc/munge/munge.key
     owner: munge
     group: munge
-    mode: "0700"
-    backup: true
-
+    mode: '0700'
+  notify: restart munge
 
 - name: Start Munge service
-  service: name=munge state=started
+  ansible.builtin.service:
+    name: munge
+    state: restarted
   register: munge_installed
-  ignore_errors: yes
+  ignore_errors: true

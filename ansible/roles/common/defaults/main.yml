@@ -4,4 +4,4 @@ darkmode: false
 development: false
 homedir: /home/{{ item.name }}
 slurm_controller:
-  hostname: "submit.dundore.net"
+  hostname: submit.dundore.net
