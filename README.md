@@ -10,7 +10,7 @@ P@ssw0rd
 
 ## Prerequisites:
 
-This was tested on Fedora 40 as a host using the following:
+This was tested on Fedora 40 (yes, even the host computer is open source only) as a host using the following:
 - Vagrant with vagrant-libvirt plugin
 - Libvirt
 - NFS4 server
@@ -59,7 +59,7 @@ To start the build process, navigate to the root directory and execute:
 make install
 ```
 
-Virtual OS used - Ubuntu 22.04
+Virtual OS used - Debian 11
 
 
 #### create 4 servers with a private network
