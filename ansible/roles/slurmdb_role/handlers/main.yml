@@ -1,0 +1,11 @@
+---
+- name: restart slurm
+  ansible.builtin.systemd:
+    name: slurmctld
+    state: restarted
+
+- name: restart munge
+  ansible.builtin.systemd:
+    name: munge
+    state: restarted
+

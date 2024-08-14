@@ -1,5 +1,30 @@
 ---
 # This playbook deploys the whole dev stack for a workstation .
+# Install Slurm based on role
+- name: Install applications for Slurm Controller
+  hosts: slurm_controller
+  become: true
+
+  roles:
+    - slurm_controller
+    - common
+
+- name: Install applications for compute nodes
+  hosts: compute_node
+  become: true
+
+  roles:
+    - compute_node
+    - common
+
+- name: Install applications for slurmdb role
+  hosts: slurmdb_role
+  become: true
+
+  roles:
+    - slurmdb_role
+    - common
+
 - name: Apply ansible config
   hosts: all
   become: true

@@ -50,10 +50,12 @@
   ansible.builtin.apt:
     name:
       - slurm
+      - slurm-client
       - slurmctld
       - slurmd
-      - munge
+      - slurmdbd
       - slurm-wlm
+      - slurm-wlm-basic-plugins
     state: present
 
 - name: Debug directory properties

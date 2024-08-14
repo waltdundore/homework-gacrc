@@ -1,0 +1,11 @@
+---
+- name: Install Slurm controller and necessary packages
+  ansible.builtin.apt:
+    name:
+      - slurm
+      - slurm-client
+      - slurmctld
+      - slurmd
+      - slurm-wlm
+      - slurm-wlm-basic-plugins
+    state: present
