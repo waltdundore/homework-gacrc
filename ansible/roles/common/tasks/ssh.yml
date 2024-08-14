@@ -45,7 +45,7 @@
     - submit.dundore.net
     - compute1.dundore.net
     - compute2.dundore.net
-    - slurmdb.dundore.net
+    #- slurmdb.dundore.net
 
 - name: Create temporary file with new keys
   ansible.builtin.copy:

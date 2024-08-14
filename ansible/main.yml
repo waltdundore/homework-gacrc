@@ -22,9 +22,9 @@
   roles:
     - compute_node
 
-- name: Install applications for slurmdb role
-  hosts: slurmdb_role
-  become: true
+#- name: Install applications for slurmdb role
+#  hosts: slurmdb_role
+#  become: true
 
-  roles:
-    - slurmdb_role
+#  roles:
+#    - slurmdb_role
