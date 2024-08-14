@@ -13,6 +13,23 @@
     group: munge
     shell: /bin/no-login
 
+- name: Creates directory
+  ansible.builtin.file:
+    path: /home/munge/.ssh
+    state: directory
+    owner: munge
+    group: munge
+    mode: "0700"
+
+- name: Copy ssh config into place for munge
+  ansible.builtin.template:
+    src: config.j2
+    dest: /home/munge/.ssh/config
+    owner: munge
+    group: munge
+    mode: "0600"
+    backup: true
+
 - name: Install munge
   ansible.builtin.apt:
     name:
@@ -28,7 +45,6 @@
       - /var/log/munge
       - /var/lib/munge
     state: directory
-    recurse: true
     owner: munge
     group: munge
     mode: "0700"
@@ -38,7 +54,6 @@
     path:
       - /run/munge
     state: directory
-    recurse: true
     owner: munge
     group: munge
     mode: "0755"

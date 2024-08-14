@@ -4,3 +4,5 @@
     src: 10_vagrant.j2
     dest: /etc/sudoers.d/10_vagrant
     validate: /usr/sbin/visudo -cf %s
+
+  

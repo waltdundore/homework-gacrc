@@ -28,6 +28,15 @@
     group: vagrant
     mode: "0700"
 
+- name: Copy ssh config into place for vagrant
+  ansible.builtin.template:
+    src: config.j2
+    dest: /home/vagrant/.ssh/config
+    owner: vagrant
+    group: vagrant
+    mode: "0600"
+    backup: true
+
 #Ensure hosts are in in the known_hosts file
 - name: Fetch SSH keys from hosts
   ansible.builtin.command: ssh-keyscan -H {{ item }} 2>/dev/null
