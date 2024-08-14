@@ -1,16 +1,8 @@
 ---
-- name: Ensure group 'munge' exists with correct gid
-  ansible.builtin.group:
-    name: munge
-    state: present
-    gid: 1001
-
-- name: Add the user 'munge' with specific UID
+- name: Create a munge user
   ansible.builtin.user:
     name: munge
-    comment: munge application user
-    uid: 1001
-    group: munge
+    comment: munge User
     shell: /bin/no-login
 
 - name: Install munge

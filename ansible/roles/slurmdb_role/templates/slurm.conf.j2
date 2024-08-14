@@ -2,8 +2,8 @@
 # Put this file on all nodes of your cluster.
 # See the slurm.conf man page for more information.
 #
-ClusterName=gacrc-cluster
-SlurmctldHost=submit
+ClusterName=homework-gacrc
+SlurmctldHost=submit.dundore.net
 #SlurmctldHost=
 #
 #DisableRootJobs=NO
@@ -39,16 +39,16 @@ ProctrackType=proctrack/cgroup
 #PropagateResourceLimitsExcept=
 #RebootProgram=
 ReturnToService=1
-SlurmctldPidFile=/var/slurmctld/slurmctld.pid
+SlurmctldPidFile=/var/run/slurmctld.pid
 SlurmctldPort=6817
-SlurmdPidFile=/var/slurmctld/slurmd.pid
+SlurmdPidFile=/var/run/slurmd.pid
 SlurmdPort=6818
-SlurmdSpoolDir=/var/slurmctld/spool
+SlurmdSpoolDir=/var/spool/slurmd
 SlurmUser=slurm
 #SlurmdUser=root
 #SrunEpilog=
 #SrunProlog=
-StateSaveLocation=/var/slurmctld/spool
+StateSaveLocation=/var/spool/slurmctld
 #SwitchType=
 #TaskEpilog=
 TaskPlugin=task/affinity,task/cgroup
@@ -87,7 +87,6 @@ Waittime=0
 #SchedulerTimeSlice=30
 SchedulerType=sched/backfill
 SelectType=select/cons_tres
-SelectTypeParameters=CR_CPU
 #
 #
 # JOB PRIORITY
@@ -114,11 +113,11 @@ SelectTypeParameters=CR_CPU
 #AccountingStorageUser=
 #AccountingStoreFlags=
 #JobCompHost=
-#JobCompLoc=
+JobCompLoc=/vagrant/status.log
 #JobCompParams=
 #JobCompPass=
 #JobCompPort=
-JobCompType=jobcomp/none
+JobCompType=jobcomp/filetxt
 #JobCompUser=
 #JobContainerType=
 JobAcctGatherFrequency=30
@@ -145,5 +144,5 @@ SlurmdLogFile=/var/log/slurmd.log
 #
 #
 # COMPUTE NODES
-NodeName=compute[1-2] NodeAddr=192.168.201.[101-102] CPUs=1 State=UNKNOWN
-PartitionName=gacrc-partition Nodes=ALL Default=YES MaxTime=INFINITE State=UP
+NodeName=compute[1-2] State=UNKNOWN
+PartitionName=debug Nodes=ALL Default=YES MaxTime=INFINITE State=UP

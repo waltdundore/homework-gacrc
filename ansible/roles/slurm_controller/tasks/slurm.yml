@@ -1,16 +1,35 @@
 ---
-# Create user and copy credentials to the other servers
-- name: Create a slurm user
+- name: Ensure group 'slurm' exists with correct gid
+  ansible.builtin.group:
+    name: slurm
+    state: present
+    gid: 1002
+
+- name: Add the user 'slurm' with specific UID
   ansible.builtin.user:
     name: slurm
-    comment: Slurm User
+    comment: slurm application user
+    uid: 1002
+    group: slurm
     shell: /bin/no-login
 
-- name: Ensure Slurm configuration directory exists
+- name: Ensure Slurm var directory exists
   ansible.builtin.file:
-    path: /etc/slurm-llnl
+    path:
+      - /var/slurmctld
     state: directory
-    mode: "0755"
+    owner: slurm
+    group: slurm
+    mode: 0755
+
+- name: Ensure Slurm spool directory exists
+  ansible.builtin.file:
+    path:
+      - /var/slurmctld/spool
+    state: directory
+    owner: slurm
+    group: slurm
+    mode: 0755
 
 - name: Install Slurm controller and necessary packages
   ansible.builtin.apt:
@@ -25,7 +44,7 @@
 - name: Configure Slurm
   ansible.builtin.template:
     src: slurm.conf.j2
-    dest: /etc/slurm.conf
+    dest: /etc/slurm/slurm.conf
   notify: restart slurm
 
 - name: Start and enable Slurm services
