@@ -2,6 +2,7 @@
 - name: Install Slurm controller and necessary packages
   ansible.builtin.apt:
     name:
+      - munge
       - slurm
       - slurmd
       - slurmdbd
