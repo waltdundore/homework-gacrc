@@ -39,16 +39,16 @@ ProctrackType=proctrack/cgroup
 #PropagateResourceLimitsExcept=
 #RebootProgram=
 ReturnToService=1
-SlurmctldPidFile=/var/slurmctld/slurmctld.pid
+SlurmctldPidFile=/slurmctld/slurmctld.pid
 SlurmctldPort=6817
-SlurmdPidFile=/var/slurmctld/slurmd.pid
+SlurmdPidFile=/slurmctld/slurmd.pid
 SlurmdPort=6818
-SlurmdSpoolDir=/var/slurmctld/spool
+SlurmdSpoolDir=/slurmctld/spool
 SlurmUser=slurm
 #SlurmdUser=root
 #SrunEpilog=
 #SrunProlog=
-StateSaveLocation=/var/slurmctld/spool
+StateSaveLocation=/slurmctld/spool
 #SwitchType=
 #TaskEpilog=
 TaskPlugin=task/affinity,task/cgroup
@@ -82,8 +82,8 @@ Waittime=0
 #
 #
 # SCHEDULING
-#DefMemPerCPU=0
-#MaxMemPerCPU=0
+DefMemPerCPU=256
+MaxMemPerCPU=1024
 #SchedulerTimeSlice=30
 SchedulerType=sched/backfill
 SelectType=select/cons_tres
