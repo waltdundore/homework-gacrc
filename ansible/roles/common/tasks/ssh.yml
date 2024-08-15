@@ -1,11 +1,12 @@
 ---
-- name: Make sure openssh is installed
-  ansible.builtin.apt:
+- name: install openssh
+  ansible.builtin.dnf:
     name:
       - openssh-server
-      - openssh-client
+      - openssh
     state: latest
     update_cache: true
+
 
 - name: Restart openssh
   ansible.builtin.service:

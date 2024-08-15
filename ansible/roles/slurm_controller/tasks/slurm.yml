@@ -31,14 +31,12 @@
   register: dir_stat
 
 - name: Install Slurm controller and necessary packages
-  ansible.builtin.apt:
+  ansible.builtin.dnf:
     name:
       - slurm
-      - slurm-client
+      - slurm-perlapi
       - slurmctld
       - slurmd
-      - slurm-wlm
-      - slurm-wlm-basic-plugins
     state: present
 
 
@@ -107,6 +105,10 @@
     dest: /etc/slurm/slurm.conf
   notify: restart slurm
 
+#https://slurm.schedmd.com/quickstart_admin.html
+#Controller: systemctl enable slurmctld
+#Database: systemctl enable slurmdbd
+#Compute Nodes: systemctl enable slurmd
 - name: Start and enable Slurm services
   ansible.builtin.systemd:
     name: slurmctld

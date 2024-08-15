@@ -15,11 +15,10 @@
     shell: /sbin/no-login
 
 - name: Install munge
-  ansible.builtin.apt:
+  ansible.builtin.dnf:
     name:
       - munge
-      - libmunge2
-      - libmunge-dev
+      - munge-libs
     state: present
 
 - name: Stop Munge service

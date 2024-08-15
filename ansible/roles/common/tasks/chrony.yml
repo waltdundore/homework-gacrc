@@ -1,6 +1,6 @@
 ---
-- name: Make sure chronyd is installed
-  ansible.builtin.apt:
+- name: install chronyd - Make sure the clocks are synchronized across the cluster.
+  ansible.builtin.yum:
     name: chrony
     state: latest
     update_cache: true

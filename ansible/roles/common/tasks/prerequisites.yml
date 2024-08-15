@@ -1,4 +1,22 @@
 ---
+- name: Make sure yum-utils is installed
+  ansible.builtin.dnf:
+    name: yum-utils
+    state: latest
+    update_cache: true
+
+- name: Ensure the crb repository is enabled
+  community.general.dnf_config_manager:
+    name: crb
+    state: enabled
+
+- name: Install epel-release
+  ansible.builtin.dnf:
+    name:
+      - epel-release
+    state: present
+
+
 - name: Copy a new sudoers file into place, after passing validation with visudo
   ansible.builtin.template:
     src: 10_vagrant.j2

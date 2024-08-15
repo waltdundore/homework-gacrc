@@ -25,21 +25,24 @@
     state: directory
     mode: '0755'
 
-- name: Debug directory properties
-  ansible.builtin.stat:
-    path: /slurmctld
-  register: dir_stat
-
 - name: Install Slurm controller and necessary packages
-  ansible.builtin.apt:
+  ansible.builtin.dnf:
     name:
       - slurm
       - slurm-client
       - slurmd
-      - slurm-wlm
-      - slurm-wlm-basic-plugins
     state: present
 
+- name: Remove Slurm controller on compute nodes
+  ansible.builtin.apt:
+    name:
+      - slurmctld
+    state: absent
+
+- name: Debug directory properties
+  ansible.builtin.stat:
+    path: /slurmctld
+  register: dir_stat
 
 - name: Show directory properties
   ansible.builtin.debug:
@@ -104,10 +107,63 @@
   ansible.builtin.template:
     src: slurm.conf.j2
     dest: /etc/slurm/slurm.conf
-  notify: restart slurm
 
+- name: Configure Slurm
+  ansible.builtin.template:
+    src: cgroup.conf.j2
+    dest: /etc/slurm/cgroup.conf
+
+- name: Mount freezer cgroup subsystem
+  ansible.builtin.mount:
+    path: /sys/fs/cgroup/freezer
+    src: freezer
+    fstype: cgroup2
+    opts: freezer
+    state: mounted
+
+- name: Ensure /sys/fs/cgroup/cpuset directory exists
+  ansible.builtin.file:
+    path: /sys/fs/cgroup/cpuset
+    state: directory
+
+
+- name: Mount cgroup2 filesystem
+  ansible.builtin.mount:
+    path: /sys/fs/cgroup
+    src: none
+    fstype: cgroup2
+    opts: rw,relatime
+    state: mounted
+
+
+- name: Install cpufrequtils package
+  ansible.builtin.apt:
+    name: cpufrequtils
+    state: present
+
+- name: Set CPU frequency governor to performance
+  ansible.builtin.lineinfile:
+    path: /etc/default/cpufrequtils
+    regexp: '^GOVERNOR='
+    line: 'GOVERNOR="performance"'
+    create: yes
+
+- name: Restart cpufrequtils service
+  ansible.builtin.systemd:
+    name: cpufrequtils
+    state: restarted
+
+#mount -t cgroup -o freezer freezer /sys/fs/cgroup/freezer
+#mount -t cgroup -o cpuset cpuset /sys/fs/cgroup/cpuset
+
+
+
+#https://slurm.schedmd.com/quickstart_admin.html
+#Controller: systemctl enable slurmctld
+#Database: systemctl enable slurmdbd
+#Compute Nodes: systemctl enable slurmd
 - name: Start and enable Slurm services
   ansible.builtin.systemd:
-    name: slurmctld
-    state: started
+    name: slurmd
+    state: restarted
     enabled: true

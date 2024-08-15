@@ -30,7 +30,7 @@ SlurmctldHost=submit
 #PluginDir=
 #PlugStackConfig=
 #PrivateData=jobs
-ProctrackType=proctrack/cgroup
+ProctrackType=proctrack/linuxproc
 #Prolog=
 #PrologFlags=
 #PrologSlurmctld=
@@ -51,7 +51,7 @@ SlurmUser=slurm
 StateSaveLocation=/slurmctld
 #SwitchType=
 #TaskEpilog=
-TaskPlugin=task/affinity,task/cgroup
+#TaskPlugin=
 #TaskProlog=
 #TopologyPlugin=topology/tree
 #TmpFS=/tmp
@@ -121,7 +121,7 @@ JobCompType=jobcomp/none
 #JobCompUser=
 #JobContainerType=
 JobAcctGatherFrequency=30
-#JobAcctGatherType=
+#JobAcctGatherTypejobacct_gather/linux=
 SlurmctldDebug=info
 SlurmctldLogFile=/var/log/slurmctld.log
 SlurmdDebug=info
@@ -144,5 +144,5 @@ SlurmdLogFile=/var/log/slurmd.log
 #
 #
 # COMPUTE NODES
-NodeName=compute[1-2] NodeAddr=192.168.201.[101-102] CPUs=1 RealMemory=360 Sockets=1 CoresPerSocket=1 ThreadsPerCore=1 State=UNKNOWN
-PartitionName=gacrc-partition Nodes=ALL Default=YES MaxTime=INFINITE State=UP
+NodeName=compute[1-2] CPUs=1 RealMemory=1000 State=UNKNOWN 
+PartitionName=gacrc-partition Default=YES OverSubscribe=FORCE:4 PriorityTier=1 State=UP MaxTime=00:30:00 Hidden=NO MinNodes=1 MaxNodes=26 DisableRootJobs=NO AllowGroups=ALL Nodes=compute[1-2]

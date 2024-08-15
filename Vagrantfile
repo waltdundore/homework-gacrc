@@ -13,7 +13,7 @@ end
 # Overrides and defaults
 VAGRANT_CPUS       = settings['VAGRANT_CPUS']       || 4
 VAGRANT_MEMORY     = settings['VAGRANT_MEMORY']     || 4092
-VAGRANT_BOX        = settings['VAGRANT_BOX']        || 'debian/bullseye64'
+VAGRANT_BOX        = settings['VAGRANT_BOX']        || 'almalinux/9'
 VAGRANT_SSHFORWARD = settings['VAGRANT_SSHFORWARD'] || false
 VAGRANT_RUN_CUSTOM = settings['VAGRANT_RUN_CUSTOM'] || 'never'
 
@@ -24,12 +24,10 @@ Vagrant.configure(2) do |config|
     # https://developer.hashicorp.com/vagrant/docs/synced-folders/nfs#root-privilege-requirement
   
 
-    config.vm.define "submit" do |submit|
+  config.vm.define "submit" do |submit|
     submit.vm.box = VAGRANT_BOX
     submit.vm.hostname = "submit.dundore.net"
     submit.vm.network "private_network", ip: "192.168.201.100"
-    
-
   end
 
   config.vm.define "compute1" do |compute1|
