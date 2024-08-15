@@ -22,7 +22,9 @@ Vagrant.configure(2) do |config|
  #Define differences between the nodes
  # NFS: Make sure to enable nfs and forct TCP and NFSv4 on the host and set sudo rules:
     # https://developer.hashicorp.com/vagrant/docs/synced-folders/nfs#root-privilege-requirement
-  config.vm.define "submit" do |submit|
+  
+
+    config.vm.define "submit" do |submit|
     submit.vm.box = VAGRANT_BOX
     submit.vm.hostname = "submit.dundore.net"
     submit.vm.network "private_network", ip: "192.168.201.100"

@@ -35,6 +35,7 @@
     name:
       - slurm
       - slurm-client
+      - slurmctld
       - slurmd
       - slurm-wlm
       - slurm-wlm-basic-plugins
