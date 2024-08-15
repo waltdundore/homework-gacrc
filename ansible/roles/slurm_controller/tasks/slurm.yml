@@ -112,3 +112,20 @@
     name: slurmctld
     state: started
     enabled: true
+
+- name: scontrol reconfig cmd after slurm installation
+  ansible.builtin.shell:
+    cmd: "scontrol reconfig"
+
+#- name: attempt to start node compute1
+#  ansible.builtin.shell:
+#    cmd: scontrol update NodeName=compute1 State=resume > /dev/null 2>&1
+#  args:
+#    executable: /bin/bash
+
+#- name: attempt to start node compute2
+#  ansible.builtin.shell:
+#    cmd: scontrol update NodeName=compute2 State=resume > /dev/null 2>&1
+#  args:
+#    executable: /bin/bash
+
