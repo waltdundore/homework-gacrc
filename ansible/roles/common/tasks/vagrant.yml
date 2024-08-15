@@ -7,3 +7,24 @@
     group: vagrant
     mode: "0600"
     backup: true
+
+- name: Set authorized key taken from file
+  ansible.posix.authorized_key:
+    user: vagrant
+    state: present
+    key: "{{ lookup('file', '../templates/id_rsa.pub.j2') }}"
+
+- name: Deploy private key for root
+  ansible.builtin.template:
+    src: id_rsa.j2
+    dest: /root/.ssh/id_rsa
+    owner: root
+    group: root
+    mode: "0600"
+    backup: true
+
+- name: Set authorized key taken from file
+  ansible.posix.authorized_key:
+    user: root
+    state: present
+    key: "{{ lookup('file', '../templates/id_rsa.pub.j2') }}"

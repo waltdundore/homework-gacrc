@@ -37,6 +37,15 @@
     mode: "0600"
     backup: true
 
+- name: Copy ssh config into place for root
+  ansible.builtin.template:
+    src: config.j2
+    dest: /root/.ssh/config
+    owner: root
+    group: root
+    mode: "0600"
+    backup: true
+
 #Ensure hosts are in in the known_hosts file
 - name: Fetch SSH keys from hosts
   ansible.builtin.command: ssh-keyscan -H {{ item }} 2>/dev/null
@@ -66,6 +75,13 @@
     path: /home/vagrant/.ssh/known_hosts
     owner: vagrant
     group: vagrant
+    mode: "0600"
+
+- name: Corrects permissions on the known_hosts file
+  ansible.builtin.file:
+    path: /root/.ssh/known_hosts
+    owner: root
+    group: root
     mode: "0600"
 
 - name: Clean up temporary file

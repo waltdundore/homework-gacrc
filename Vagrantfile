@@ -50,7 +50,7 @@ Vagrant.configure(2) do |config|
   #  slurmdb.vm.network "private_network", ip: "192.168.201.99"
   #end
 
- #config.vm.network :private_network, type: 'dhcp'
+
  config.ssh.forward_agent = VAGRANT_SSHFORWARD
  config.vm.synced_folder '.', '/vagrant', disabled: true
  config.vm.synced_folder ".", "/vagrant",type: "nfs",nfs_version: 4,nfs_udp: false
