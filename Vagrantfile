@@ -15,14 +15,19 @@ VAGRANT_CPUS       = settings['VAGRANT_CPUS']       || 2
 VAGRANT_MEMORY     = settings['VAGRANT_MEMORY']     || 4096
 VAGRANT_BOX        = settings['VAGRANT_BOX']        || 'almalinux/9'
 VAGRANT_SSHFORWARD = settings['VAGRANT_SSHFORWARD'] || false
-VAGRANT_RUN_CUSTOM = settings['VAGRANT_RUN_CUSTOM'] || 'never'
 
 Vagrant.configure(2) do |config|
 
  #Define differences between the nodes
  # NFS: Make sure to enable nfs and forct TCP and NFSv4 on the host and set sudo rules:
     # https://developer.hashicorp.com/vagrant/docs/synced-folders/nfs#root-privilege-requirement
-  
+
+  config.vm.provider "libvirt" do |libvirt|
+    libvirt.cpu_mode = 'host-model' # Ensures CPU features are passed through
+    libvirt.cpus = VAGRANT_CPUS
+    libvirt.memory = VAGRANT_MEMORY
+  end  
+
 
   config.vm.define "submit" do |submit|
     submit.vm.box = VAGRANT_BOX
@@ -42,6 +47,7 @@ Vagrant.configure(2) do |config|
     compute2.vm.network "private_network", ip: "192.168.201.102"
   end
 
+  #Disable the slurmdb node until slurm.conf is correct on the other 2 boxes, we will add this later
   #config.vm.define "slurmdb" do |slurmdb|
   #  slurmdb.vm.box = VAGRANT_BOX
   #  slurmdb.vm.hostname = "slurmdb.dundore.net"
@@ -55,7 +61,7 @@ Vagrant.configure(2) do |config|
  config.vm.synced_folder ".", "/vagrant",type: "nfs",nfs_version: 4,nfs_udp: false
  
  config.vm.provision "shell", inline: <<-SHELL
-    cat /vagrant/secure/.ssh/id_rsa.pub.j2 >> /home/vagrant/.ssh/authorized_keys
+    cat ./ansible/roles/common/templates/id_rsa.pub.j2 >> /home/vagrant/.ssh/authorized_keys
   SHELL
 
   # Provision with Ansible

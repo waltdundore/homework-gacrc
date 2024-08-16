@@ -145,5 +145,6 @@ SlurmdLogFile=/var/log/slurmd.log
 
 #
 # COMPUTE NODES
-NodeName=compute[1-2] CPUs=2 RealMemory=4096 State=UNKNOWN
+NodeName=compute1 CPUs=2 RealMemory=4096 Sockets=2 CoresPerSocket=1 ThreadsPerCore=1
+NodeName=compute2 CPUs=2 RealMemory=4096 Sockets=2 CoresPerSocket=1 ThreadsPerCore=1
 PartitionName=gacrc-partition Default=YES OverSubscribe=FORCE:4 PriorityTier=1 State=UP MaxTime=00:30:00 Hidden=NO MinNodes=1 MaxNodes=26 DisableRootJobs=NO AllowGroups=ALL Nodes=compute[1-2]

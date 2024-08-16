@@ -1,4 +1,5 @@
 #!/bin/bash
+#not sure this is necessary anymore after fixing with ansible
 
 serverlist=("submit" "compute1" "compute2")
 
