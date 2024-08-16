@@ -1,6 +1,14 @@
 #!/bin/bash
 
-vagrant ssh submit -c "sudo scontrol reconfig"
+vagrant ssh submit -c "sudo scontrol reconfigure"
+vagrant ssh submit -c "sudo systemctl restart slurmctld"
+vagrant ssh compute1 -c "sudo systemctl restart slurmd"
+vagrant ssh compute2 -c "sudo systemctl restart slurmd"
+vagrant ssh submit -c "sudo scontrol update NodeName=compute1 State=IDLE"
+vagrant ssh submit -c "sudo scontrol update NodeName=compute2 State=IDLE"
+
+vagrant ssh submit -c "sudo scontrol show nodes"
+
 #vagrant ssh submit -c "sudo scontrol update NodeName=compute1 State=resume"
 #vagrant ssh submit -c "sudo scontrol update NodeName=compute2 State=resume"
 vagrant ssh submit -c "systemctl is-active --quiet slurmctld && echo slurmctld is running on submit.dundore.net"
