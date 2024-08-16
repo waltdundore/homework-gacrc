@@ -114,3 +114,15 @@ slurmdb.dundore.net 192.168.201.99 #slurmdb_host
 - slurmdb
  - pending
 
+# Testing
+## Test the installation
+```
+$vagrant status
+
+Current machine states:
+
+submit                    running (libvirt)
+compute1                  running (libvirt)
+compute2                  running (libvirt)
+```
+
