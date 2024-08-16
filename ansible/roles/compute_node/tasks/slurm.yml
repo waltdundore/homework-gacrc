@@ -12,20 +12,6 @@
     group: slurm
     state: present
 
-- name: Ensure slurmd is running as slurm user
-  ansible.builtin.lineinfile:
-    path: /usr/lib/systemd/system/slurmd.service
-    regexp: '^User='
-    line: 'User=slurm'
-  notify: Restart slurmd
-
-- name: Ensure slurmd group is correct
-  ansible.builtin.lineinfile:
-    path: /usr/lib/systemd/system/slurmd.service
-    regexp: '^Group='
-    line: 'Group=slurm'
-  notify: Restart slurmd
-
 - name: Create Slurm directories if they do not exist
   ansible.builtin.file:
     path: "{{ item }}"
@@ -46,6 +32,20 @@
       - slurm-slurmd
       - slurm-perlapi
     state: present
+
+- name: Ensure slurmd is running as slurm user
+  ansible.builtin.lineinfile:
+    path: /usr/lib/systemd/system/slurmd.service
+    regexp: '^User='
+    line: 'User=slurm'
+  notify: Restart slurmd
+
+- name: Ensure slurmd group is correct
+  ansible.builtin.lineinfile:
+    path: /usr/lib/systemd/system/slurmd.service
+    regexp: '^Group='
+    line: 'Group=slurm'
+  notify: Restart slurmd
 
 - name: Configure Slurm
   ansible.builtin.template:

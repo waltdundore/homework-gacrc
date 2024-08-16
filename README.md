@@ -54,7 +54,7 @@ P@ssw0rd
 ## Prerequisites:
 
 This was tested on Fedora 40 (yes, even the host computer is open source only) as a host using the following:
-- Vagrant with vagrant-libvirt plugin
+- [Vagrant](https://developer.hashicorp.com/vagrant/install) with vagrant-libvirt plugin
 - Libvirt
 - NFS4 server
 - make
