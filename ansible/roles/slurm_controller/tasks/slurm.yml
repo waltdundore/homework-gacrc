@@ -39,8 +39,9 @@
     name:
       - slurm
       - slurm-perlapi
-      - slurmctld
-      - slurmd
+      - slurm-slurmctld
+      - slurm-slurmd
+      - slurm-libs
     state: present
 
 

@@ -1,12 +1,13 @@
 ---
-- name: install openssh
-  ansible.builtin.dnf:
-    name:
-      - openssh-server
-      - openssh
-    state: latest
-    update_cache: true
+- name: clean dnf cache
+  ansible.builtin.shell: dnf clean all 2>&1 >/dev/null
 
+#- name: install openssh
+#  ansible.builtin.dnf:
+#    name:
+#      - openssh-server
+#      - openssh
+#    state: latest
 
 - name: Restart openssh
   ansible.builtin.service:

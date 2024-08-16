@@ -15,12 +15,12 @@
   roles:
     - slurm_controller
 
-#- name: Install applications for compute nodes
-#  hosts: compute_node
-#  become: true
+- name: Install applications for compute nodes
+  hosts: compute_node
+  become: true
 
-#  roles:
-#    - compute_node
+  roles:
+    - compute_node
 
 #- name: Install applications for slurmdb role
 #  hosts: slurmdb_role

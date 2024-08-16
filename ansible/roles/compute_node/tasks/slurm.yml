@@ -29,15 +29,11 @@
   ansible.builtin.dnf:
     name:
       - slurm
-      - slurm-client
-      - slurmd
+      - slurm-slurmd
+      - slurm-perlapi
     state: present
 
-- name: Remove Slurm controller on compute nodes
-  ansible.builtin.apt:
-    name:
-      - slurmctld
-    state: absent
+ 
 
 - name: Debug directory properties
   ansible.builtin.stat:

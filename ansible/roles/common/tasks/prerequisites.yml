@@ -9,16 +9,14 @@
     name: yum-utils
     state: latest
 
+- name: clean dnf cache
+  ansible.builtin.shell: dnf clean all 2>&1 >/dev/null
 
-- name: Execute the command to enable the CentOS CRB repository
-  ansible.builtin.shell: dnf -y config-manager --set-enabled crb 2>&1 >/dev/null
+- name: install epel
+  ansible.builtin.shell:  dnf config-manager --set-enabled crb && dnf -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm 2>&1 >/dev/null
 
-- name: Install epel-release
-  ansible.builtin.dnf:
-    name:
-      - epel-release
-    state: present
-
+- name: clean dnf cache
+  ansible.builtin.shell: dnf clean all 2>&1 >/dev/null
 
 - name: Copy a new sudoers file into place, after passing validation with visudo
   ansible.builtin.template:
