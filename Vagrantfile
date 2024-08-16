@@ -54,7 +54,7 @@ Vagrant.configure(2) do |config|
   #  slurmdb.vm.network "private_network", ip: "192.168.201.99"
   #end
 
-  config.vm.provision "shell", path: "scripts/addswap.sh"
+ config.vm.provision "shell", path: "scripts/addswap.sh"
 
  config.ssh.forward_agent = VAGRANT_SSHFORWARD
  config.vm.synced_folder '.', '/vagrant', disabled: true
@@ -73,6 +73,5 @@ Vagrant.configure(2) do |config|
     ansible.inventory_path = "ansible/inventory.ini"
     ansible.raw_arguments = ["--diff"]
   end
-
 
 end

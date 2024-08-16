@@ -124,6 +124,12 @@
   ansible.builtin.shell:
     cmd: "scontrol reconfig"
 
+- name: Start and enable Slurm services
+  ansible.builtin.systemd:
+    name: slurmctld
+    state: restarted
+    enabled: true
+
 #- name: attempt to start node compute1
 #  ansible.builtin.shell:
 #    cmd: scontrol update NodeName=compute1 State=resume > /dev/null 2>&1
