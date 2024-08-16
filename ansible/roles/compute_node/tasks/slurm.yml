@@ -109,45 +109,27 @@
     src: cgroup.conf.j2
     dest: /etc/slurm/cgroup.conf
 
-- name: Mount freezer cgroup subsystem
-  ansible.builtin.mount:
-    path: /sys/fs/cgroup/freezer
-    src: freezer
-    fstype: cgroup2
-    opts: freezer
-    state: mounted
+#- name: Mount freezer cgroup subsystem
+#  ansible.builtin.mount:
+#    path: /sys/fs/cgroup/freezer
+#    src: freezer
+#    fstype: cgroup2
+#    opts: freezer
+#    state: mounted
 
-- name: Ensure /sys/fs/cgroup/cpuset directory exists
-  ansible.builtin.file:
-    path: /sys/fs/cgroup/cpuset
-    state: directory
-
-
-- name: Mount cgroup2 filesystem
-  ansible.builtin.mount:
-    path: /sys/fs/cgroup
-    src: none
-    fstype: cgroup2
-    opts: rw,relatime
-    state: mounted
+#- name: Ensure /sys/fs/cgroup/cpuset directory exists
+#  ansible.builtin.file:
+#    path: /sys/fs/cgroup/cpuset
+#    state: directory
 
 
-- name: Install cpufrequtils package
-  ansible.builtin.apt:
-    name: cpufrequtils
-    state: present
-
-- name: Set CPU frequency governor to performance
-  ansible.builtin.lineinfile:
-    path: /etc/default/cpufrequtils
-    regexp: '^GOVERNOR='
-    line: 'GOVERNOR="performance"'
-    create: yes
-
-- name: Restart cpufrequtils service
-  ansible.builtin.systemd:
-    name: cpufrequtils
-    state: restarted
+#- name: Mount cgroup2 filesystem
+#  ansible.builtin.mount:
+#    path: /sys/fs/cgroup
+#    src: none
+#    fstype: cgroup2
+#    opts: rw,relatime
+#    state: mounted
 
 #mount -t cgroup -o freezer freezer /sys/fs/cgroup/freezer
 #mount -t cgroup -o cpuset cpuset /sys/fs/cgroup/cpuset
