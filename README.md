@@ -37,6 +37,12 @@
 
 # Documentation
 
+## It is strange how many times I have seen: 
+```
+make install
+ ```
+fail...and for strange reasons.  
+
 ### Security note:
 - This demo/proof of concept has insecure keys in place so it can work as a demo. 
 - /secure directory - Public and private keys and munge key will need to be updated for security. These are stored in: 

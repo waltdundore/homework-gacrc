@@ -62,3 +62,38 @@
     name: slurmd
     state: restarted
     enabled: true
+
+
+- name: Check available memory
+  ansible.builtin.shell: cat /proc/meminfo
+  register: memory_info
+
+- name: Display memory information
+  ansible.builtin.debug:
+    msg: "{{ memory_info.stdout_lines }}"
+
+- name: Check if memory is configured correctly
+  ansible.builtin.fail:
+    msg: "Memory configuration seems incorrect. Please check manually."
+  when: "'MemAvailable' not in memory_info.stdout"
+
+
+- name: Update system packages
+  dnf:
+    name: '*'
+    state: latest
+
+- name: Reboot the node
+  reboot:
+    msg: "Rebooting to apply updates and recheck memory configuration."
+    pre_reboot_delay: 5
+    post_reboot_delay: 60
+    test_command: whoami
+
+- name: Verify node status after reboot
+  command: scontrol show nodes
+  register: node_status
+
+- name: Display node status
+  debug:
+    msg: "{{ node_status.stdout }}"
