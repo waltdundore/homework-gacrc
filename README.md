@@ -3,7 +3,8 @@
 # Documentation
 
 ### Security note:
-- /secure directory - Public and private keys and munge key is stored in 
+- This demo/proof of concept has insecure keys in place so it can work as a demo. 
+- /secure directory - Public and private keys and munge key will need to be updated for security. These are stored in: 
 ```
 ./homework-gacrc/ansible/roles/common/templates
 ```
@@ -97,22 +98,19 @@ slurmdb.dundore.net 192.168.201.99 #slurmdb_host
 
 ##### Roles
 - common
-  - Install and configure chrony
-  - Update the /etc/hosts file
-  - copy sudoers file into /etc/sudoers.d/10_vagrant and validate for vagrant user
+  - Install and configure chrony for time synchronization
+  - Update the /etc/hosts file for name resolution
+  - copy sudoers file into /etc/sudoers.d/10_vagrant and validate for vagrant user permissions
   - install and enable sshd
   - ssh-keyscan to known_hosts
-  - I recommend generating a new ssh key and save the public and private key in the secure/.ssh directory. They are linked to insecure_key and insecure_key.pub "ssh-keygen -b 4096"
+  - install munge packages, munge key and start munge
+  
 - slurm_controller
- - Install munge packages, apply permissions and start munge
- - verify munge key
-   -Security note: change the munge key - put your key in the secure/munge directory and name it munge.key.j2. 
+ - Install slurmctld and apply /etc/slurm.conf
+
 - compute_node
- - Install munge packages, apply permissions and start munge
- - copy and verify munge key
+ - Install slurmd and apply /etc/slurm.conf
 
 - slurmdb
-
-name hosts and add entries to hosts file
-
+ - pending
 
