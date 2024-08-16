@@ -108,7 +108,7 @@
   ansible.builtin.template:
     src: slurm.conf.j2
     dest: /etc/slurm/slurm.conf
-  notify: restart slurm
+  notify: restart slurmctld
 
 #https://slurm.schedmd.com/quickstart_admin.html
 #Controller: systemctl enable slurmctld

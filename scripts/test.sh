@@ -1,5 +1,6 @@
 #!/bin/bash
 
+vagrant status
 vagrant ssh submit -c "sudo scontrol reconfigure"
 vagrant ssh submit -c "sudo systemctl restart slurmctld"
 vagrant ssh compute1 -c "sudo systemctl restart slurmd"

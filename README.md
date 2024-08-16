@@ -152,7 +152,7 @@ slurmdb.dundore.net 192.168.201.99 #slurmdb_host
 # Testing
 ## Test the installation
 ```
-$vagrant status
+$ vagrant status
 
 Current machine states:
 
@@ -161,3 +161,7 @@ compute1                  running (libvirt)
 compute2                  running (libvirt)
 ```
 
+```
+$ vagrant ssh submit -c "sudo scontrol show nodes"
+
+```

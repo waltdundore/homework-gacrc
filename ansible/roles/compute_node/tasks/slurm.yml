@@ -1,30 +1,43 @@
----
 - name: Ensure group 'slurm' exists with correct gid
   ansible.builtin.group:
     name: slurm
     state: present
     gid: 1002
-    
+
 - name: Add the user 'slurm' with specific UID
   ansible.builtin.user:
     name: slurm
     comment: slurm application user
     uid: 1002
     group: slurm
+    state: present
 
+- name: Ensure slurmd is running as slurm user
+  ansible.builtin.lineinfile:
+    path: /usr/lib/systemd/system/slurmd.service
+    regexp: '^User='
+    line: 'User=slurm'
+  notify: Restart slurmd
 
-- name: Create Slurm directory if it does not exist
-  file:
-    path: /slurmctld
+- name: Ensure slurmd group is correct
+  ansible.builtin.lineinfile:
+    path: /usr/lib/systemd/system/slurmd.service
+    regexp: '^Group='
+    line: 'Group=slurm'
+  notify: Restart slurmd
+
+- name: Create Slurm directories if they do not exist
+  ansible.builtin.file:
+    path: "{{ item }}"
     state: directory
+    owner: slurm
+    group: slurm
     mode: '0755'
-
-
-- name: Create Slurm spool directory if it does not exist
-  file:
-    path: /slurmctld/spool
-    state: directory
-    mode: '0755'
+  loop:
+    - /var/run/slurm
+    - /var/log/slurm
+    - /slurmctld
+    - /slurmctld/spool
 
 - name: Install Slurm controller and necessary packages
   ansible.builtin.dnf:
@@ -34,113 +47,16 @@
       - slurm-perlapi
     state: present
 
- 
-
-- name: Debug directory properties
-  ansible.builtin.stat:
-    path: /slurmctld
-  register: dir_stat
-
-- name: Show directory properties
-  ansible.builtin.debug:
-    msg:
-      - "Owner: {{ dir_stat.stat.pw_name }}"
-      - "Group: {{ dir_stat.stat.gr_name }}"
-      - "Permissions: {{ dir_stat.stat.mode }}"
-
-- name: Ensure /slurmctld ownership and permissions
-  ansible.builtin.file:
-    path: /slurmctld
-    state: directory
-    owner: slurm
-    group: slurm
-    mode: '0755'
-
-- name: Debug directory properties
-  ansible.builtin.stat:
-    path: /slurmctld
-  register: dir_stat
-
-- name: Show directory properties
-  ansible.builtin.debug:
-    msg:
-      - "Owner: {{ dir_stat.stat.pw_name }}"
-      - "Group: {{ dir_stat.stat.gr_name }}"
-      - "Permissions: {{ dir_stat.stat.mode }}"
-
-- name: Debug directory properties
-  ansible.builtin.stat:
-    path: /slurmctld/spool
-  register: dir_stat
-
-- name: Show directory properties
-  ansible.builtin.debug:
-    msg:
-      - "Owner: {{ dir_stat.stat.pw_name }}"
-      - "Group: {{ dir_stat.stat.gr_name }}"
-      - "Permissions: {{ dir_stat.stat.mode }}"
-
-- name: Ensure /slurmctld/spool ownership and permissions
-  ansible.builtin.file:
-    path: /slurmctld/spool
-    state: directory
-    owner: slurm
-    group: slurm
-    mode: '0755'
-
-- name: Debug directory properties
-  ansible.builtin.stat:
-    path: /slurmctld/spool
-  register: dir_stat
-
-- name: Show directory properties
-  ansible.builtin.debug:
-    msg:
-      - "Owner: {{ dir_stat.stat.pw_name }}"
-      - "Group: {{ dir_stat.stat.gr_name }}"
-      - "Permissions: {{ dir_stat.stat.mode }}"
-
 - name: Configure Slurm
   ansible.builtin.template:
     src: slurm.conf.j2
     dest: /etc/slurm/slurm.conf
 
-- name: Configure Slurm
+- name: Configure cgroup for Slurm
   ansible.builtin.template:
     src: cgroup.conf.j2
     dest: /etc/slurm/cgroup.conf
 
-#- name: Mount freezer cgroup subsystem
-#  ansible.builtin.mount:
-#    path: /sys/fs/cgroup/freezer
-#    src: freezer
-#    fstype: cgroup2
-#    opts: freezer
-#    state: mounted
-
-#- name: Ensure /sys/fs/cgroup/cpuset directory exists
-#  ansible.builtin.file:
-#    path: /sys/fs/cgroup/cpuset
-#    state: directory
-
-
-#- name: Mount cgroup2 filesystem
-#  ansible.builtin.mount:
-#    path: /sys/fs/cgroup
-#    src: none
-#    fstype: cgroup2
-#    opts: rw,relatime
-#    state: mounted
-
-#mount -t cgroup -o freezer freezer /sys/fs/cgroup/freezer
-#mount -t cgroup -o cpuset cpuset /sys/fs/cgroup/cpuset
-
-
-
-#https://slurm.schedmd.com/quickstart_admin.html
-#Controller: systemctl enable slurmctld
-#Database: systemctl enable slurmdbd
-#Compute Nodes: systemctl enable slurmd
 - name: Start and enable Slurm services
   ansible.builtin.systemd:
     name: slurmd
