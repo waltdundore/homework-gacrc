@@ -1,4 +1,39 @@
-# homework-gacrc
+# Project Status Report
+
+**Project Name: homework-gacrc**  
+
+---
+
+## 1. Summary
+
+- **Overall Status:** On track
+- **Summary of Progress:** slurmctld and slurmd nodes installing correctly - working on cpu reporting of nodes
+
+## 2. Milestones and Deliverables
+
+- **Completed Milestones:** 
+  - *Vagrantfile*
+  - *Ansible infrastructure*
+  - *slurmctld node operational*
+  - *slurmd nodes operational*
+- **Upcoming Milestones:** 
+  - *nodes operational and reporting*
+  - *slurmdb integration*
+  - *automated testing*
+
+
+## 4. Issues and Risks
+
+- **Current Issues:**
+  - *Issue 1* - Nodes not reporting cpu status
+
+
+---
+
+**Prepared by: Walter Dundore**  
+**Date: 20240816 13:12**
+
+
 
 # Documentation
 
