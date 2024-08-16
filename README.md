@@ -17,7 +17,7 @@
   - *slurmctld node operational*
   - *slurmd nodes operational*
 - **Upcoming Milestones:** 
-  - *nodes operational and reporting*
+  - *nodes operational and reporting -  munge error in slurm.conf*
   - *slurmdb integration*
   - *automated testing*
 
@@ -25,13 +25,13 @@
 ## 4. Issues and Risks
 
 - **Current Issues:**
-  - *Issue 1* - Node Error: UNKNOWN+DRAIN+INVALID_REG
+  - *Issue 1* - Node Error: UNKNOWN+DRAIN+INVALID_REG (well if you don't add munge to the slurm.conf this happens....)
 
 
 ---
 
 **Prepared by: Walter Dundore**  
-**Date: 20240816 13:12**
+**Date: 20240816 14:46**
 
 
 
