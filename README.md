@@ -3,10 +3,17 @@
 # Documentation
 
 ### Security note:
-- /secure directory - The munge key and private ssh key are encrypted using ansible vault. For this to work properly, there must be a file named '.vault_password.txt' containing the password to decrypt them using ansible vault.  For this demo the vault password is set to 
+- /secure directory - Public and private keys and munge key is stored in 
+```
+./homework-gacrc/ansible/roles/common/templates
+```
+The private key and munge key are protected using ansible vault.  For this to work properly, there must be a file named '.vault_password.txt' containing the password to decrypt them located in the ./secure directory.  For this demo the password file has been provided and the vault password is set to 
+
 ```
 P@ssw0rd
 ```
+
+#### Change this password by decrypting and re-encrypting these files. Set the new password in the .vault_password file in the ./secure directory
 
 ## Prerequisites:
 

@@ -87,7 +87,7 @@ Waittime=0
 #SchedulerTimeSlice=30
 SchedulerType=sched/backfill
 SelectType=select/cons_tres
-SelectTypeParameters=CR_CPU
+SelectTypeParameters=CR_Core
 #
 #
 # JOB PRIORITY
@@ -145,5 +145,5 @@ SlurmdLogFile=/var/log/slurmd.log
 
 #
 # COMPUTE NODES
-NodeName=compute[1-2] CPUs=1 RealMemory=1000 State=UNKNOWN
+NodeName=compute[1-2] CPUs=2 RealMemory=4096 State=UNKNOWN
 PartitionName=gacrc-partition Default=YES OverSubscribe=FORCE:4 PriorityTier=1 State=UP MaxTime=00:30:00 Hidden=NO MinNodes=1 MaxNodes=26 DisableRootJobs=NO AllowGroups=ALL Nodes=compute[1-2]

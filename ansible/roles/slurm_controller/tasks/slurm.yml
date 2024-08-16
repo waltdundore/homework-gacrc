@@ -117,7 +117,7 @@
 - name: Start and enable Slurm services
   ansible.builtin.systemd:
     name: slurmctld
-    state: started
+    state: restarted
     enabled: true
 
 - name: scontrol reconfig cmd after slurm installation
