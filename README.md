@@ -37,7 +37,7 @@
 
 # Documentation
 
-## It is strange how many times I have seen: 
+It is strange how many times I have seen: 
 ```
 make install
  ```
