@@ -59,7 +59,7 @@ To start the build process, navigate to the root directory and execute:
 make install
 ```
 
-Virtual OS used - Debian 11
+Virtual OS used - Started with Debian 11 which had trouble with cgroups. Switched to Alma Linux 9.
 
 
 #### create 4 servers with a private network

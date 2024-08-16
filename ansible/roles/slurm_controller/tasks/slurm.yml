@@ -12,6 +12,10 @@
     uid: 1002
     group: slurm
 
+#- name: Run a command as the slurm user
+#  command: somecommand
+#  become: true
+#  become_user: slurm
 
 - name: Create Slurm directory if it does not exist
   file:

@@ -1,14 +1,17 @@
 ---
+- name: SELinux
+  ansible.posix.selinux:
+    policy: targeted
+    state: permissive
+
 - name: Make sure yum-utils is installed
   ansible.builtin.dnf:
     name: yum-utils
     state: latest
-    update_cache: true
 
-- name: Ensure the crb repository is enabled
-  community.general.dnf_config_manager:
-    name: crb
-    state: enabled
+
+- name: Execute the command to enable the CentOS CRB repository
+  ansible.builtin.shell: dnf -y config-manager --set-enabled crb 2>&1 >/dev/null
 
 - name: Install epel-release
   ansible.builtin.dnf:
