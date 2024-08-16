@@ -23,6 +23,18 @@ This was tested on Fedora 40 (yes, even the host computer is open source only) a
 - NFS4 server
 - make
 
+Notable packages installed:
+```
+libnfs-5.0.3-1
+libvirt-10.1.0-3
+libvirt-devel
+libvirt-libs
+make-4.4.1-6
+nfs-utils-2.6.4-0
+vagrant-2.4.1-1
+
+```
+
 #### NFS Config
 ```
 [nfsd]
@@ -76,6 +88,8 @@ compute1.dundore.net 192.168.201.101 #compute_node #1
 compute2.dundore.net 192.168.201.102 #compute_node #2
 slurmdb.dundore.net 192.168.201.99 #slurmdb_host
 ```
+
+![diagram of network](https://github.com/waltdundore/homework-gacrc/blob/production/img/diagram.png?raw=true)
 
 
 ### Stage 2:
