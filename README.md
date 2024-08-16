@@ -25,7 +25,7 @@
 ## 4. Issues and Risks
 
 - **Current Issues:**
-  - *Issue 1* - Nodes not reporting cpu status
+  - *Issue 1* - Node Error: UNKNOWN+DRAIN+INVALID_REG
 
 
 ---
