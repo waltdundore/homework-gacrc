@@ -1,7 +1,7 @@
 #!/bin/bash
 #not sure this is necessary anymore after fixing with ansible
 
-serverlist=("submit" "compute1" "compute2")
+serverlist=("submit" "compute1" "compute2" "slurmdb")
 
 for remote_server in "${serverlist[@]}"; do
   ssh-keyscan "$remote_server" >> ~/new_keys

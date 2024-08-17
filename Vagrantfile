@@ -48,11 +48,11 @@ Vagrant.configure(2) do |config|
   end
 
   #Disable the slurmdb node until slurm.conf is correct on the other 2 boxes, we will add this later
-  #config.vm.define "slurmdb" do |slurmdb|
-  #  slurmdb.vm.box = VAGRANT_BOX
-  #  slurmdb.vm.hostname = "slurmdb.dundore.net"
-  #  slurmdb.vm.network "private_network", ip: "192.168.201.99"
-  #end
+ # config.vm.define "slurmdb" do |slurmdb|
+ #   slurmdb.vm.box = VAGRANT_BOX
+ #   slurmdb.vm.hostname = "slurmdb.dundore.net"
+ #   slurmdb.vm.network "private_network", ip: "192.168.201.99"
+ # end
 
  config.vm.provision "shell", path: "scripts/addswap.sh"
 
@@ -60,11 +60,11 @@ Vagrant.configure(2) do |config|
  config.vm.synced_folder '.', '/vagrant', disabled: true
  config.vm.synced_folder ".", "/vagrant",type: "nfs",nfs_version: 4,nfs_udp: false
  
- config.vm.provision "shell", inline: <<-SHELL
-    cat /vagrant/ansible/roles/common/templates/id_rsa.pub.j2 >> /home/vagrant/.ssh/authorized_keys
-  SHELL
+ #config.vm.provision "shell", inline: <<-SHELL
+ #cat ./ansible/roles/common/templates/id_rsa.pub.j2 >> /home/vagrant/.ssh/authorized_keys
+ #SHELL
 
-  # Provision with Ansible
+# Provision with Ansible
   config.vm.provision "ansible" do |ansible|
     ansible.vault_password_file = "./secure/.vault_pass.txt"
     ENV['ANSIBLE_ROLES_PATH'] = File.dirname(__FILE__) + "./ansible/roles"

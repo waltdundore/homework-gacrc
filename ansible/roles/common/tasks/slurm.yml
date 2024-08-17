@@ -1,0 +1,53 @@
+---
+- name: Ensure group 'slurm' exists with correct gid
+  ansible.builtin.group:
+    name: slurm
+    state: present
+    gid: 1002
+    
+- name: Add the user 'slurm' with specific UID
+  ansible.builtin.user:
+    name: slurm
+    comment: slurm application user
+    uid: 1002
+    group: slurm
+
+#- name: Run a command as the slurm user
+#  command: somecommand
+#  become: true
+#  become_user: slurm
+
+- name: Create Slurm directory if it does not exist
+  file:
+    path: /slurmctld
+    state: directory
+    mode: '0755'
+
+- name: Create Slurm spool directory if it does not exist
+  file:
+    path: /slurmctld/spool
+    state: directory
+    mode: '0755'
+
+
+- name: Ensure /slurmctld ownership and permissions
+  ansible.builtin.file:
+    path: /slurmctld
+    state: directory
+    owner: slurm
+    group: slurm
+    mode: '0755'
+\
+
+- name: Ensure /slurmctld/spool ownership and permissions
+  ansible.builtin.file:
+    path: /slurmctld/spool
+    state: directory
+    owner: slurm
+    group: slurm
+    mode: '0755'
+
+- name: Configure Slurm
+  ansible.builtin.template:
+    src: slurm.conf.j2
+    dest: /etc/slurm/slurm.conf

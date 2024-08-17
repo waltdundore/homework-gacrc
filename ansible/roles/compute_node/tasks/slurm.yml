@@ -1,30 +1,3 @@
-- name: Ensure group 'slurm' exists with correct gid
-  ansible.builtin.group:
-    name: slurm
-    state: present
-    gid: 1002
-
-- name: Add the user 'slurm' with specific UID
-  ansible.builtin.user:
-    name: slurm
-    comment: slurm application user
-    uid: 1002
-    group: slurm
-    state: present
-
-- name: Create Slurm directories if they do not exist
-  ansible.builtin.file:
-    path: "{{ item }}"
-    state: directory
-    owner: slurm
-    group: slurm
-    mode: '0755'
-  loop:
-    - /var/run/slurm
-    - /var/log/slurm
-    - /slurmctld
-    - /slurmctld/spool
-
 - name: Install Slurm controller and necessary packages
   ansible.builtin.dnf:
     name:
@@ -47,41 +20,11 @@
     line: 'Group=slurm'
   notify: Restart slurmd
 
-- name: Configure Slurm
-  ansible.builtin.template:
-    src: slurm.conf.j2
-    dest: /etc/slurm/slurm.conf
-
-- name: Configure cgroup for Slurm
-  ansible.builtin.template:
-    src: cgroup.conf.j2
-    dest: /etc/slurm/cgroup.conf
-
 - name: Start and enable Slurm services
   ansible.builtin.systemd:
     name: slurmd
     state: restarted
     enabled: true
-
-
-- name: Check available memory
-  ansible.builtin.shell: cat /proc/meminfo
-  register: memory_info
-
-- name: Display memory information
-  ansible.builtin.debug:
-    msg: "{{ memory_info.stdout_lines }}"
-
-- name: Check if memory is configured correctly
-  ansible.builtin.fail:
-    msg: "Memory configuration seems incorrect. Please check manually."
-  when: "'MemAvailable' not in memory_info.stdout"
-
-
-- name: Update system packages
-  dnf:
-    name: '*'
-    state: latest
 
 - name: Reboot the node
   reboot:
@@ -90,10 +33,14 @@
     post_reboot_delay: 60
     test_command: whoami
 
-- name: Verify node status after reboot
-  command: scontrol show nodes
-  register: node_status
+- name: Start and enable munge
+  ansible.builtin.systemd:
+    name: munge
+    state: restarted
+    enabled: true
 
-- name: Display node status
-  debug:
-    msg: "{{ node_status.stdout }}"
+- name: Start and enable Slurm services
+  ansible.builtin.systemd:
+    name: slurmd
+    state: restarted
+    enabled: true

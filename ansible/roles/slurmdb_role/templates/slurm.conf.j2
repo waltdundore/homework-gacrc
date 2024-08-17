@@ -2,7 +2,7 @@ ClusterName=gacrc-cluster
 ControlMachine=submit
 ControlAddr=192.168.201.100
 #
-SlurmUser=slurm
+SlurmUser=slurmansible/roles/slurm_controller/templates/slurm.conf.j2
 SlurmdUser=root
 SlurmctldPort=6817
 SlurmdPort=6818
@@ -35,8 +35,8 @@ JobCompType=jobcomp/none
 #
 
 # Compute Nodes
-NodeName=compute1 NodeAddr=192.168.201.101 Port=6818 CPUs=2 RealMemory=4096 Sockets=2 CoresPerSocket=1 ThreadsPerCore=1 State=UNKNOWN
-NodeName=compute2 NodeAddr=192.168.201.102 Port=6818 CPUs=2 RealMemory=4096 Sockets=2 CoresPerSocket=1 ThreadsPerCore=1 State=UNKNOWN
+NodeName=compute1 NodeAddr=192.168.201.101 Port=6818 CPUs=2 RealMemory=3915 Sockets=2 CoresPerSocket=1 ThreadsPerCore=1 State=UNKNOWN
+NodeName=compute2 NodeAddr=192.168.201.102 Port=6818 CPUs=2 RealMemory=3915 Sockets=2 CoresPerSocket=1 ThreadsPerCore=1 State=UNKNOWN
 
 # Partition Configuration
 PartitionName=gacrc-partition Default=YES OverSubscribe=FORCE:4 PriorityTier=1 State=UP MaxTime=00:30:00 Hidden=NO MinNodes=1 MaxNodes=2 DisableRootJobs=NO AllowGroups=ALL Nodes=compute[1-2]
