@@ -1,6 +1,0 @@
----
-- name: Install mariadb
-  ansible.builtin.import_tasks: mariadb.yml
-
-- name: Install slurm
-  ansible.builtin.import_tasks: slurm.yml

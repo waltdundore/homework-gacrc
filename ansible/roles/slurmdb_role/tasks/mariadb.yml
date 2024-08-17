@@ -1,7 +1,0 @@
----
-- name: Install Slurm controller and necessary packages
-  ansible.builtin.dnf:
-    name:
-      - mariadb-server
-    state: present
-
