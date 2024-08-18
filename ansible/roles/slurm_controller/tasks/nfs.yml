@@ -1,0 +1,40 @@
+---
+- name: Install NFS Server
+  ansible.builtin.dnf:
+    name: nfs-utils
+    state: present
+
+- name: Ensure /mnt/nfs/home exists
+  ansible.builtin.file:
+    path: /mnt/nfs/home
+    state: directory
+    mode: '0777'
+
+- name: NFS scripts and homedir exports
+  ansible.builtin.lineinfile:
+    path: /etc/exports
+    state: present
+    line: "{{ item }}"
+  with_items:
+    - /vagrant/scripts *(rw,no_root_squash,no_subtree_check,insecure,fsid=0)
+    - /mnt/nfs/home *(rw,no_root_squash,no_subtree_check,insecure,fsid=0)
+
+- name: Reload systemd manager configuration
+  ansible.builtin.systemd:
+    daemon_reload: yes
+
+
+- name: Restart nfs-server.service
+  ansible.builtin.systemd:
+    daemon_reload: yes
+    state: restarted
+    name: nfs-server.service
+
+- name: Re-export the NFS shares
+  command: exportfs -rav
+  register: exportfs_output
+  failed_when: "'error' in exportfs_output.stderr"
+
+- name: Display exportfs output
+  ansible.builtin.debug:
+    msg: "{{ exportfs_output.stdout }}"

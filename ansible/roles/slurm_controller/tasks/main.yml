@@ -1,3 +1,6 @@
 ---
 - name: Install slurm
   ansible.builtin.import_tasks: slurm.yml
+
+- name: Install nfs
+  ansible.builtin.import_tasks: nfs.yml

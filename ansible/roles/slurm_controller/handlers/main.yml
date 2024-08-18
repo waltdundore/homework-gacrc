@@ -13,3 +13,17 @@
   ansible.builtin.systemd:
     name: munge
     state: restarted
+
+- name: slurm useradd
+  ansible.builtin.user:
+    name: "{{ new_user_name }}"
+    state: present
+    home: /mnt/nfs/{{ new_user_name }}
+    shell: /bin/bash
+    comment: "{{ new_user_fullname }}"
+
+- name: slurm homedir create
+  ansible.builtin.file:
+    path: /mnt/nfs/{{ new_user_name }}
+    state: directory
+    mode: "0777"

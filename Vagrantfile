@@ -70,6 +70,7 @@ Vagrant.configure(2) do |config|
     ansible.playbook = "./ansible/main.yml"
     ansible.inventory_path = "ansible/inventory.ini"
     ansible.raw_arguments = ["--diff"]
+    ansible.verbose = "vvv"
   end
 
   # nfs directory disappears on compute nodes after ansible provisioning -troubleshooting

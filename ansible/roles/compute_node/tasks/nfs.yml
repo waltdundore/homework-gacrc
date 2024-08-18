@@ -1,0 +1,32 @@
+---
+- name: Install NFS client package
+  dnf:
+    name: nfs-utils
+    state: present
+
+- name: Ensure mount point exists
+  file:
+    path: /scripts
+    state: directory
+    mode: '0755'
+
+- name: Mount NFS share
+  mount:
+    path: /scripts
+    src: "submit.dundore.net:/vagrant/scripts"
+    fstype: nfs
+    state: mounted
+    opts: rw,vers=4,hard,intr
+
+- name: Ensure NFS share is mounted on boot
+  mount:
+    path: /scripts
+    src: "submit.dundore.net:/vagrant/scripts"
+    fstype: nfs
+    opts: rw,vers=4,hard,intr
+    state: mounted
+
+- name: Reload systemd manager configuration
+  ansible.builtin.systemd:
+    daemon_reload: yes
+
