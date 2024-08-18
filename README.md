@@ -29,7 +29,8 @@ cd <directory to house project>
 git clone https://github.com/waltdundore/homework-gacrc.git
 cd homework-gacrc
 make install
-scripts/multi.sh
+scripts/test.sh #Test that the install has  gone correctly and finish configs
+scripts/multi.sh #Run a command across both nodes 
 ```
 
 # Documentation
@@ -132,12 +133,15 @@ slurmdb.dundore.net 192.168.201.99 #slurmdb_host
 # Testing
 ## Test the installation
 
-If all services are running and the compute nodes are in a state to process tasks, test and verify all nodes are processing tasks:
+Run the test script to verify all went well and finalize configuration:
+```
+$ scripts/test.sh
+```
+
+Test the setup with scripts/multi.sh
 ```
 $ scripts/multi.sh
 compute1.dundore.net
 compute2.dundore.net
 
 ```
-
-Further testing can be accomplished using scripts/test.sh
