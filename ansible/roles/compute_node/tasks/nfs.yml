@@ -16,7 +16,7 @@
     state: directory
     mode: '0777'
 
-- name: Mount NFS share
+- name: Mount scripts NFS share
   mount:
     path: /mnt/nfs/scripts
     src: "submit.dundore.net:/vagrant/scripts"
@@ -24,10 +24,26 @@
     state: mounted
     opts: rw,vers=3,hard,intr
 
-- name: Ensure NFS share is mounted on boot
+- name: Ensure scripts NFS share is mounted on boot
   mount:
     path: /mnt/nfs/scripts
     src: "submit.dundore.net:/vagrant/scripts"
+    fstype: nfs
+    opts: rw,vers=3,hard,intr
+    state: mounted
+
+- name: Mount home NFS share
+  mount:
+    path: /mnt/nfs/home
+    src: "submit.dundore.net:/mnt/nfs/home"
+    fstype: nfs
+    state: mounted
+    opts: rw,vers=3,hard,intr
+
+- name: Ensure home NFS share is mounted on boot
+  mount:
+    path: /mnt/nfs/home
+    src: "submit.dundore.net:/mnt/nfs/home"
     fstype: nfs
     opts: rw,vers=3,hard,intr
     state: mounted
