@@ -67,9 +67,9 @@ make-4.4.1-6
 nfs-utils-2.6.4-0
 vagrant-2.4.1-1
 ```
-#### [Using synced nfs folders with vagrant](https://developer.hashicorp.com/vagrant/docs/synced-folders/nfs)
+[Using synced nfs folders with vagrant](https://developer.hashicorp.com/vagrant/docs/synced-folders/nfs)
 
-#### NFS Config
+#### Using NFS 4 and TCP
 ```
 [nfsd]
 udp=n
@@ -101,7 +101,7 @@ To start the build process, navigate to the root directory and execute:
 make install
 ```
 
-Virtual OS used - Started with Debian 11 which had trouble with cgroups. Switched to Alma Linux 9.
+Virtual OS used - Alma Linux 9.
 
 
 #### create 4 servers with a private network
@@ -127,7 +127,7 @@ slurmdb.dundore.net 192.168.201.99 #slurmdb_host
   - ssh-keyscan to known_hosts
   - install munge packages, munge key and start munge
   
-- slurm_controller, compute_node, slurmdb
+- slurm_controller, compute_node, slurmdb:
  custom package installs
 
 # Testing
