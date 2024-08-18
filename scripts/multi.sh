@@ -1,5 +1,2 @@
 #!/bin/bash
-#SBATCH --nodes=2 
-#SBATCH --ntasks-per-node=1 
-
-hostname
+vagrant ssh submit -c "srun --nodes=2 --ntasks-per-node=1 hostname"
