@@ -7,7 +7,7 @@
 ## 1. Summary
 
 - **Overall Status:** On track
-- **Summary of Progress:** slurmctld and slurmd nodes installing correctly - working on cpu reporting of nodes
+- **Summary of Progress:** running a batch job is not shared among the hosts - troubleshooting
 
 ## 2. Milestones and Deliverables
 
@@ -16,11 +16,13 @@
   - *Ansible infrastructure*
   - *slurmctld node operational*
   - *slurmd nodes operational*
+  - *nodes operational and reporting
+  - *manual testing*
+
 - **Upcoming Milestones:** 
-  - *nodes operational and reporting -  munge error in slurm.conf*
   - *slurmdb integration*
   - *automated testing*
-
+  
 
 ## 4. Issues and Risks
 
@@ -36,12 +38,6 @@
 
 
 # Documentation
-
-It is strange how many times I have seen: 
-```
-make install
- ```
-fail...and for strange reasons.  
 
 ### Security note:
 - This demo/proof of concept has insecure keys in place so it can work as a demo. 
@@ -159,7 +155,7 @@ slurmdb.dundore.net 192.168.201.99 #slurmdb_host
 # Testing
 ## Test the installation
 ```
-$ vagrant status
+$ scripts/test.sh
 
 Current machine states:
 
@@ -167,6 +163,7 @@ submit                    running (libvirt)
 compute1                  running (libvirt)
 compute2                  running (libvirt)
 ```
+The above should test munge and slurm and verify that all is working correctly. 
 
 ```
 $ vagrant ssh submit -c "sudo scontrol show nodes"

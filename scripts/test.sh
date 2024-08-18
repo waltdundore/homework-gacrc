@@ -31,9 +31,9 @@ vagrant ssh submit -c "sudo systemctl is-active --quiet slurmctld && echo slurmc
 vagrant ssh compute1 -c "sudo systemctl restart slurmd"
 vagrant ssh compute2 -c "sudo systemctl restart slurmd"
 echo Testing slurmd status on compute1
-vagrant ssh compute1 -c "sudo systemctl status slurmd"
+vagrant ssh compute1 -c "sudo systemctl is-active --quiet slurmd && echo slurmd is running on compute1.dundore.net"
 echo Testing slurmd status on compute2
-vagrant ssh compute2 -c "sudo systemctl status slurmd"
+vagrant ssh compute2 -c "sudo systemctl is-active --quiet slurmd && echo slurmd is running on compute2.dundore.net"
 vagrant ssh submit -c "sudo scontrol update NodeName=compute1 State=IDLE"
 vagrant ssh submit -c "sudo scontrol update NodeName=compute2 State=IDLE"
 

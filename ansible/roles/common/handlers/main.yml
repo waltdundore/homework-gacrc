@@ -1,7 +1,24 @@
 ---
+# handle restarts of services
+
 - name: restart slurm
   ansible.builtin.systemd:
     name: slurmctld
+    state: restarted
+
+- name: restart slurmd
+  ansible.builtin.systemd:
+    name: slurmd
+    state: restarted
+
+- name: restart slurmctld
+  ansible.builtin.systemd:
+    name: slurmctld
+    state: restarted
+
+- name: restart slurmdbd
+  ansible.builtin.systemd:
+    name: slurmdbd
     state: restarted
 
 - name: restart munge

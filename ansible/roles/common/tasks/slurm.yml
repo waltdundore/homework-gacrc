@@ -51,6 +51,30 @@
     group: slurm
     mode: "0775"
 
+- name: Ensure /var/log/slurm directory exists
+  file:
+    path: /var/log/slurm
+    state: directory
+    owner: slurm
+    group: slurm
+    mode: '0755'
+
+- name: Ensure jobcomp.log file exists
+  file:
+    path: /var/log/slurm/jobcomp.log
+    state: touch
+    owner: slurm
+    group: slurm
+    mode: '0644'
+      
+- name: Ensure jobcomp.log file exists
+  file:
+    path: /var/log/slurm/jobcomp.log
+    state: touch
+    owner: slurm
+    group: slurm
+    mode: '0644'
+
 - name: Configure Slurm
   ansible.builtin.template:
     src: slurm.conf.j2
