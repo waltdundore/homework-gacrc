@@ -20,11 +20,7 @@
     line: 'Group=slurm'
   notify: Restart slurmd
 
-- name: Start and enable Slurm services
-  ansible.builtin.systemd:
-    name: slurmd
-    state: restarted
-    enabled: true
+
 
 - name: Reboot the node
   reboot:

@@ -19,12 +19,3 @@
     state: restarted
     enabled: true
 
-- name: scontrol reconfig cmd after slurm installation
-  ansible.builtin.shell:
-    cmd: "scontrol reconfig"
-
-- name: Start and enable Slurm services
-  ansible.builtin.systemd:
-    name: slurmctld
-    state: restarted
-    enabled: true
