@@ -139,14 +139,8 @@ slurmdb.dundore.net 192.168.201.99 #slurmdb_host
   - ssh-keyscan to known_hosts
   - install munge packages, munge key and start munge
   
-- slurm_controller
- - Install slurmctld and apply /etc/slurm.conf
-
-- compute_node
- - Install slurmd and apply /etc/slurm.conf
-
-- slurmdb
- - pending
+- slurm_controller, compute_node, slurmdb
+ custom package installs
 
 # Testing
 ## Test the installation
