@@ -1,13 +1,9 @@
 # Project Status Report
-
-**Project Name: homework-gacrc**  
-
 ---
 
 ## 1. Summary
 
-- **Overall Status:** On track
-- **Summary of Progress:** running a batch job is not shared among the hosts - troubleshooting
+- **Overall Status:** Main objectives complete
 
 ## 2. Milestones and Deliverables
 
@@ -22,16 +18,19 @@
 - **Upcoming Milestones:** 
   - *slurmdb integration*
   - *automated testing*
-  
-
-
-
 ---
 
 **Prepared by: Walter Dundore**  
 **Date: 20240817 23:27**
 
-
+# Quick start
+```
+cd <directory to house project>
+git clone https://github.com/waltdundore/homework-gacrc.git
+cd homework-gacrc
+make install
+scripts/test.sh
+```
 
 # Documentation
 
