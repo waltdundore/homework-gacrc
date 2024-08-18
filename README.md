@@ -159,6 +159,6 @@ The above should test munge and slurm and verify that all is working correctly.
 
 Test and verify all nodes are processing tasks:
 ```
-vagrant ssh submit -c "srun --nodes=2 --ntasks-per-node=1 hostname
+vagrant ssh submit -c "srun --nodes=2 --ntasks-per-node=1 hostname"
 
 ```
