@@ -57,7 +57,7 @@ This was tested on Fedora 40 (yes, even the host computer is open source only) a
 - NFS4 server
 - make
 
-Notable packages installed:
+#### Notable packages installed:
 ```
 libnfs-5.0.3-1
 libvirt-10.1.0-3
@@ -66,9 +66,8 @@ libvirt-libs
 make-4.4.1-6
 nfs-utils-2.6.4-0
 vagrant-2.4.1-1
-
-
 ```
+#### [Using synced nfs folders with vagrant](https://developer.hashicorp.com/vagrant/docs/synced-folders/nfs)
 
 #### NFS Config
 ```
@@ -78,7 +77,6 @@ tcp=y
 vers3=n
 vers4=y
 ```
-### Vagrant: [Using synced nfs folders with vagrant](https://developer.hashicorp.com/vagrant/docs/synced-folders/nfs)
 
 
 ### Stage 1: Vagrant server creation using libvirt
