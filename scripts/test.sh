@@ -27,7 +27,7 @@ vagrant ssh submit -c "sudo scontrol show nodes"
 echo =========================
 echo "Testing Nodes"
 echo =========================
-echo Testing /vagrant status on compute1
-vagrant ssh compute1 -c "sudo ls -la /vagrant"
-echo Testing /vagrant status on compute2
-vagrant ssh compute2 -c "sudo ls -la /vagrant"
+echo Testing /mnt/nfs/scripts status on compute1
+vagrant ssh compute1 -c "sudo ls -la /mnt/nfs/scripts"
+echo Testing /mnt/nfs/scripts status on compute2
+vagrant ssh compute2 -c "sudo ls -la /mnt/nfs/scripts"
