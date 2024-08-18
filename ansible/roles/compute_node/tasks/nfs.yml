@@ -4,26 +4,32 @@
     name: nfs-utils
     state: present
 
-- name: Ensure mount point exists
-  file:
-    path: /scripts
+- name: Ensure /mnt/nfs/home exists
+  ansible.builtin.file:
+    path: /mnt/nfs/home
     state: directory
-    mode: '0755'
+    mode: '0777'
+
+- name: Ensure /mnt/nfs/scripts exists
+  ansible.builtin.file:
+    path: /mnt/nfs/scripts
+    state: directory
+    mode: '0777'
 
 - name: Mount NFS share
   mount:
-    path: /scripts
+    path: /mnt/nfs/scripts
     src: "submit.dundore.net:/vagrant/scripts"
     fstype: nfs
     state: mounted
-    opts: rw,vers=4,hard,intr
+    opts: rw,vers=3,hard,intr
 
 - name: Ensure NFS share is mounted on boot
   mount:
-    path: /scripts
+    path: /mnt/nfs/scripts
     src: "submit.dundore.net:/vagrant/scripts"
     fstype: nfs
-    opts: rw,vers=4,hard,intr
+    opts: rw,vers=3,hard,intr
     state: mounted
 
 - name: Reload systemd manager configuration

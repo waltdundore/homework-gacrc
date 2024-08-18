@@ -15,16 +15,17 @@
   - *nodes operational and reporting*
   - *manual testing*
   - *nfs server on submit node*
+  - */mnt/nfs/scripts scripts mount on compute nodes*
 
 - **Upcoming Milestones:** 
-  - *nfs scripts mount on compute nodes*
+  
   - *nfs homedir mount on compute nodes*
   - *slurmdb integration*
   - *automated testing*
 ---
 
 **Prepared by: Walter Dundore**  
-**Date: 20240818 10:54**
+**Date: 20240818 14:30**
 
 # Quick start
 ```
