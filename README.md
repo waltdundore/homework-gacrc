@@ -24,10 +24,6 @@
   - *automated testing*
   
 
-## 4. Issues and Risks
-
-- **Current Issues:**
-  - *Issue 1* - Node Error: UNKNOWN+DRAIN+INVALID_REG (well if you don't add munge to the slurm.conf this happens....)
 
 
 ---
