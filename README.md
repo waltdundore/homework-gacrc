@@ -78,7 +78,7 @@ tcp=y
 vers3=n
 vers4=y
 ```
-### Vagrant: (Using synced nfs folders with vagrant)[https://developer.hashicorp.com/vagrant/docs/synced-folders/nfs]
+### Vagrant: [Using synced nfs folders with vagrant](https://developer.hashicorp.com/vagrant/docs/synced-folders/nfs)
 
 
 ### Stage 1: Vagrant server creation using libvirt
