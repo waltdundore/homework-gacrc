@@ -30,6 +30,7 @@ git clone https://github.com/waltdundore/homework-gacrc.git
 cd homework-gacrc
 make install
 scripts/test.sh
+scripts/multi.sh
 ```
 
 # Documentation
