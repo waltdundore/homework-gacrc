@@ -12,10 +12,13 @@
   - *Ansible infrastructure*
   - *slurmctld node operational*
   - *slurmd nodes operational*
-  - *nodes operational and reporting
+  - *nodes operational and reporting*
   - *manual testing*
+  - *nfs server on submit node*
 
 - **Upcoming Milestones:** 
+  - *nfs scripts mount on compute nodes*
+  - *nfs homedir mount on compute nodes*
   - *slurmdb integration*
   - *automated testing*
 ---
