@@ -159,6 +159,8 @@ The above should test munge and slurm and verify that all is working correctly.
 
 Test and verify all nodes are processing tasks:
 ```
-vagrant ssh submit -c "srun --nodes=2 --ntasks-per-node=1 hostname"
+$ scripts/multi.sh
+compute1.dundore.net
+compute2.dundore.net
 
 ```

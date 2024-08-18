@@ -17,9 +17,9 @@ echo Testing permissions on compute2 munge key.
 vagrant ssh compute2 -c "sudo ls -la /etc/munge/munge.key"
 vagrant ssh compute2 -c "sudo systemctl restart munge"
 echo Testing munge key decode from submit to compute1
-vagrant ssh submit -c "sudo munge -n | ssh compute1 unmunge"
+vagrant ssh submit -c "sudo munge -n | ssh -y compute1 unmunge"
 echo Testing munge key decode from submit to compute2
-vagrant ssh submit -c "sudo munge -n | ssh compute2 unmunge"
+vagrant ssh submit -c "sudo munge -n | ssh -y compute2 unmunge"
 
 echo =========================
 echo "Testing Slurm"
