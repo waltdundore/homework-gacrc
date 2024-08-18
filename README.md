@@ -29,7 +29,6 @@ cd <directory to house project>
 git clone https://github.com/waltdundore/homework-gacrc.git
 cd homework-gacrc
 make install
-scripts/test.sh
 scripts/multi.sh
 ```
 
@@ -132,23 +131,13 @@ slurmdb.dundore.net 192.168.201.99 #slurmdb_host
 
 # Testing
 ## Test the installation
-```
-$ scripts/test.sh
 
-Current machine states:
-
-submit                    running (libvirt)
-compute1                  running (libvirt)
-compute2                  running (libvirt)
-```
-The above should test munge and slurm and verify that all is working correctly. 
-
-
-
-Test and verify all nodes are processing tasks:
+If all services are running and the compute nodes are in a state to process tasks, test and verify all nodes are processing tasks:
 ```
 $ scripts/multi.sh
 compute1.dundore.net
 compute2.dundore.net
 
 ```
+
+Further testing can be accomplished using scripts/test.sh

@@ -72,6 +72,7 @@ Vagrant.configure(2) do |config|
     ansible.raw_arguments = ["--diff"]
   end
 
+  # nfs directory disappears on compute nodes after ansible provisioning -troubleshooting
   config.vm.synced_folder ".", "/vagrant",type: "nfs",nfs_version: 4,nfs_udp: false
 
 end
