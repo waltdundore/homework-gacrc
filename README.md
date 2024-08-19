@@ -113,7 +113,8 @@ Virtual OS used - Alma Linux 9.
 submit.dundore.net 192.168.201.100 #slurm submit node slurm_controller
 compute1.dundore.net 192.168.201.101 #compute_node #1
 compute2.dundore.net 192.168.201.102 #compute_node #2
-slurmdb.dundore.net 192.168.201.99 #slurmdb_host
+#Slurmdb got cut from the features for time
+#slurmdb.dundore.net 192.168.201.99 #slurmdb_host
 ```
 
 ![diagram of network](https://github.com/waltdundore/homework-gacrc/blob/production/img/diagram.png?raw=true)
