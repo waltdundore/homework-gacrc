@@ -142,7 +142,7 @@ Run the test script to verify all went well and finalize configuration:
 $ scripts/test.sh
 ```
 
-Test the setup with scripts/multi.sh
+Test the setup with scripts/multi.sh  Vagrant user will ssh in and run the 'hostname' command on each node.
 ```
 $ scripts/multi.sh
 compute1.dundore.net
